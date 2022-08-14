@@ -1,0 +1,14 @@
+{
+    "name": "WebCompany",
+    "alias": "webcompany",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\WebCompany\\Providers\\WebCompanyServiceProvider",
+        "Modules\\WebCompany\\Providers\\WebCompanyEventServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
