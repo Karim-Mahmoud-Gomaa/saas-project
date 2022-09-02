@@ -20,6 +20,21 @@ class EventServiceProvider extends ServiceProvider
         ],
     ];
 
+    public function register()
+    {
+        #bind:Repository
+        $this->app->bind('App\Repository\Page\PageRepositoryInterface','App\Repository\Page\PageRepository');
+		$this->app->bind('App\Repository\PageTranslation\PageTranslationRepositoryInterface','App\Repository\PageTranslation\PageTranslationRepository');
+		$this->app->bind('App\Repository\Service\ServiceRepositoryInterface','App\Repository\Service\ServiceRepository');
+		$this->app->bind('App\Repository\Package\PackageRepositoryInterface','App\Repository\Package\PackageRepository');
+		$this->app->bind('App\Repository\Feature\FeatureRepositoryInterface','App\Repository\Feature\FeatureRepository');
+		$this->app->bind('App\Repository\FAQ\FAQRepositoryInterface','App\Repository\FAQ\FAQRepository');
+
+		$this->app->bind('App\Repository\Term\TermRepositoryInterface','App\Repository\Term\TermRepository');
+		$this->app->bind('App\Repository\Promo\PromoRepositoryInterface','App\Repository\Promo\PromoRepository');
+		$this->app->bind('App\Repository\Renewal\RenewalRepositoryInterface','App\Repository\Renewal\RenewalRepository');
+		$this->app->bind('App\Repository\Order\OrderRepositoryInterface','App\Repository\Order\OrderRepository');
+    }
     /**
      * Register any events for your application.
      *

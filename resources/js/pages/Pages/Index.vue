@@ -6,9 +6,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-flex align-items-center justify-content-between">
-                            <h4 class="mb-0">Pages Table</h4>
+                            <h4 class="mb-0">Pages SEO Table</h4>
                             <div class="page-title-right">
-                                <button type="button" @click="$refs.FormModal.create()" class="btn btn-success waves-effect waves-light">Add New +</button>
                                 <form-modal ref="FormModal" :fetchData="fetchData" />
                             </div>
                         </div>
@@ -18,59 +17,62 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div v-if="pages&&pages.data.length" class="card-body" >
+                            <div v-if="pages&&pages.data.length&&locales" class="card-body" >
                                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th>Type</th>
+                                            <th>#</th>
                                             <th>Name</th>
                                             <th>Title</th>
-                                            <th>Blocks</th>
-                                            <th>Optionis</th>
+                                            <th>Keywords</th>
+                                            <th>Description</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr v-for="(page,index) in pages.data">
-                                            <td class="col-1 text-center">
-                                                <i v-if="page.is_home" class="fa-solid fa-house-chimney text-info"></i>
-                                                <i v-if="!page.is_home&&!page.is_404" class="fa-solid fa-minus text-success"></i>
-                                                <div v-if="page.is_404" class="text-center" style="font-size: smaller;">
-                                                    <i class="fa-solid fa-4 text-danger"></i>
-                                                    <i class="fa-solid fa-0 text-danger"></i>
-                                                    <i class="fa-solid fa-4 text-danger"></i>
-                                                </div>
-                                                
-                                            </td>
-                                            <td>
-                                                {{page.name}}
-                                            </td>
-                                            <td>{{page.title}}</td>
-                                            <td>{{page.blocks.length}}</td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-chevron-down"></i> More
-                                                    </button>
-                                                    <div class="dropdown-menu" style="min-width: 120px;">
-                                                        <!-- <router-link :to="{ name: 'page_show', params: { page_id: page.id } }" tag="a" class="dropdown-item">
-                                                            <i class="far fa-eye"></i> Show 
-                                                        </router-link> -->
-                                                        <a @click="$refs.FormModal.edit(page)" class="dropdown-item dropdownItem" href="javascript:;">
-                                                            <i class="far fa-edit"></i> Edit
-                                                        </a>
-                                                        <a @click="$refs.FormModal.destroy(page.id)" class="dropdown-item dropdownItem" href="javascript:;">
-                                                            <i class="far fa-trash-alt"></i> Delete
-                                                        </a>
-                                                        <a @click="$refs.FormModal.forceDestroy(page.id)" class="dropdown-item dropdownItem" href="javascript:;">
-                                                            <i class="far fa-trash-alt"></i> Force Delete
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </td>
+                                            <td>{{pages.current_page*(index+1)}}</td>
+                                            <td>{{page.name}}</td>
+                                            <template v-if="page.id>1">
+                                                <td>
+                                                    <template v-for="(lang,index) in locales">
+                                                        <div v-if="page.title&&page.title[index]" @click="$refs.FormModal.edit(page,'title',index)" class="btn btn-sm btn-info btn-soft-info waves-effect waves-light m-1">
+                                                            {{lang.name}} <i class="fa-regular fa-eye"></i>
+                                                        </div>
+                                                        <div v-else @click="$refs.FormModal.edit(page,'title',index)" class="btn btn-sm btn-success btn-soft-success waves-effect waves-light m-1">
+                                                            {{lang.name}} <i class="fa-solid fa-plus"></i>
+                                                        </div>
+                                                    </template>
+                                                </td>
+                                                <td>
+                                                    <template v-for="(lang,index) in locales">
+                                                        <div v-if="page.keywords&&page.keywords[index]" @click="$refs.FormModal.edit(page,'keywords',index)" class="btn btn-sm btn-info btn-soft-info waves-effect waves-light m-1">
+                                                            {{lang.name}} <i class="fa-regular fa-eye"></i>
+                                                        </div>
+                                                        <div v-else @click="$refs.FormModal.edit(page,'keywords',index)" class="btn btn-sm btn-success btn-soft-success waves-effect waves-light m-1">
+                                                            {{lang.name}} <i class="fa-solid fa-plus"></i>
+                                                        </div>
+                                                    </template>
+                                                </td>
+                                                <td>
+                                                    <template v-for="(lang,index) in locales">
+                                                        <div v-if="page.description&&page.description[index]" @click="$refs.FormModal.edit(page,'description',index)" class="btn btn-sm btn-info btn-soft-info waves-effect waves-light m-1">
+                                                            {{lang.name}} <i class="fa-regular fa-eye"></i>
+                                                        </div>
+                                                        <div v-else @click="$refs.FormModal.edit(page,'description',index)" class="btn btn-sm btn-success btn-soft-success waves-effect waves-light m-1">
+                                                            {{lang.name}} <i class="fa-solid fa-plus"></i>
+                                                        </div>
+                                                    </template>
+                                                </td>
+                                            </template>
+                                            <template v-else>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </template>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <pagination-nav class="mt-3" v-if="pages.links.total_pages>1" :pageSize="pages.links.total_pages" :currentPage="pages.links.current_page" :GoToPage="fetchData" />
+                                <pagination-nav v-if="pages.last_page>1" :pageSize="pages.last_page" :currentPage="pages.current_page" :GoToPage="fetchData" :loading="loader" />
                             </div>
                             <div v-else class="card-body">
                                 <beat-loader v-if="loader" :loading="loader" color="#5578eb"></beat-loader>
@@ -95,10 +97,15 @@ import axios from 'axios';
 export default {
     components: { LayoutDefault, PaginationNav, FormModal },
     data() {
-        return { pages: null, loader: false }
+        return { 
+            pages: null,
+            locales: null, 
+            loader: false,
+        }
     },
     created() {
         this.fetchData();
+        this.getLocales();
     },
     methods: { 
         fetchData(num = 1) {
@@ -106,9 +113,14 @@ export default {
             this.loader = true;
             let data = { params: { page: num } };
             axios.get('pages', data).then(({ data }) => {
-                this.pages = data.page;
-                if(!data.page.data.length&&num!=1){this.fetchData(1)}
+                this.pages = data.success.pages;
+                if(!data.success.pages.data.length&&num!=1){this.fetchData(1)}
                 this.loader = false;
+            });
+        },
+        getLocales() {
+            axios.get('locales').then(({ data }) => {
+                this.locales = data.success;
             });
         },
     },

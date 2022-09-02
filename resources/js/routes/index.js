@@ -24,11 +24,15 @@ const router = new VueRouter({
                 { path: '/', name: 'home', component: () => import('../pages/Home'), meta: { title: 'Home', middleware: [auth, checkAuth] } },
                 { path: 'login', name: 'login', component: () => import('../pages/auth/Login'), meta: { title: 'Login', middleware: [guest] } },
                 //#Vue:Routes
-		        {path:'menus',name: 'menus',component:()=>import('../pages/Menus/Index'),meta:{title: 'Menus',middleware: [auth, checkAuth]} },
-		        {path:'menus-trashed',name: 'menus-trashed',component:()=>import('../pages/Menus/Trashed'),meta:{title: 'Trashed Menus',middleware: [auth, checkAuth]} },
+		        {path:'renewals',name: 'renewals',component:()=>import('../pages/Renewals/Index'),meta:{title: 'Renewals',middleware: [auth, checkAuth]} },
+		        {path:'terms',name: 'terms',component:()=>import('../pages/Terms/Index'),meta:{title: 'Terms Length',middleware: [auth, checkAuth]} },
+		        {path:'services',name: 'services',component:()=>import('../pages/Services/Services'),meta:{title: 'Services',middleware: [auth, checkAuth]} },
+		        {path:'packages',name: 'packages',component:()=>import('../pages/Services/Packages'),meta:{title: 'Packages',middleware: [auth, checkAuth]} },
+		        {path:'features',name: 'features',component:()=>import('../pages/Services/Features'),meta:{title: 'Features',middleware: [auth, checkAuth]} },
+		        {path:'faq',name: 'faq',component:()=>import('../pages/Services/FAQ'),meta:{title: 'FAQs',middleware: [auth, checkAuth]} },
 		        
                 {path:'pages',name: 'pages',component:()=>import('../pages/Pages/Index'),meta:{title: 'Pages',middleware: [auth, checkAuth]} },
-		        {path:'pages-trashed',name: 'pages-trashed',component:()=>import('../pages/Pages/Trashed'),meta:{title: 'Trashed Pages',middleware: [auth, checkAuth]} },
+		        {path:'pages-translations',name: 'pages-translations',component:()=>import('../pages/Pages/Translations'),meta:{title: 'Page Translations',middleware: [auth, checkAuth]} },
 		        
                 {path:'users',name: 'users',component:()=>import('../pages/Users/Index'),meta:{title: 'Users',middleware: [auth, checkAuth]} },
                 {path:'users/:user_id',name: 'user_show',component:()=>import('../pages/Users/Show'),meta:{title: 'User Details',middleware: [auth, checkAuth]}},

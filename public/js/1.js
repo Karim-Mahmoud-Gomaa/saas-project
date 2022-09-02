@@ -243,6 +243,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var externalScript = document.createElement('script');
@@ -981,24 +1002,9 @@ var render = function() {
                           "router-link",
                           {
                             staticClass: "link-page",
-                            attrs: { to: { name: "pages" }, tag: "a" }
+                            attrs: { to: { name: "terms" }, tag: "a" }
                           },
-                          [_vm._v("Active Pages")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "link-page",
-                            attrs: { to: { name: "pages-trashed" }, tag: "a" }
-                          },
-                          [_vm._v("Trashed Pages")]
+                          [_vm._v("Term Length")]
                         )
                       ],
                       1
@@ -1024,9 +1030,9 @@ var render = function() {
                           "router-link",
                           {
                             staticClass: "link-page",
-                            attrs: { to: { name: "menus" }, tag: "a" }
+                            attrs: { to: { name: "pages" }, tag: "a" }
                           },
-                          [_vm._v("Active Menus")]
+                          [_vm._v("Pages SEO")]
                         )
                       ],
                       1
@@ -1039,9 +1045,113 @@ var render = function() {
                           "router-link",
                           {
                             staticClass: "link-page",
-                            attrs: { to: { name: "menus-trashed" }, tag: "a" }
+                            attrs: {
+                              to: { name: "pages-translations" },
+                              tag: "a"
+                            }
                           },
-                          [_vm._v("Trashed Menus")]
+                          [_vm._v("Pages Content")]
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._m(3),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "sub-menu",
+                    attrs: { "aria-expanded": "true" }
+                  },
+                  [
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "link-page",
+                            attrs: { to: { name: "services" }, tag: "a" }
+                          },
+                          [_vm._v("Services")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "link-page",
+                            attrs: { to: { name: "packages" }, tag: "a" }
+                          },
+                          [_vm._v("Packages")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "link-page",
+                            attrs: { to: { name: "features" }, tag: "a" }
+                          },
+                          [_vm._v("Features")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "link-page",
+                            attrs: { to: { name: "faq" }, tag: "a" }
+                          },
+                          [_vm._v("FAQs")]
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _vm._m(4),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "sub-menu",
+                    attrs: { "aria-expanded": "true" }
+                  },
+                  [
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "link-page",
+                            attrs: { to: { name: "renewals" }, tag: "a" }
+                          },
+                          [_vm._v("Renewals")]
                         )
                       ],
                       1
@@ -1119,6 +1229,22 @@ var staticRenderFns = [
       },
       [
         _c("i", { staticClass: "far fa-file-alt" }),
+        _c("span", [_vm._v("Public")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "has-arrow waves-effect",
+        attrs: { href: "javascript: void(0);" }
+      },
+      [
+        _c("i", { staticClass: "far fa-file-alt" }),
         _c("span", [_vm._v("Pages")])
       ]
     )
@@ -1134,8 +1260,24 @@ var staticRenderFns = [
         attrs: { href: "javascript: void(0);" }
       },
       [
-        _c("i", { staticClass: "fa-solid fa-bars-staggered" }),
-        _c("span", [_vm._v("Menus")])
+        _c("i", { staticClass: "far fa-file-alt" }),
+        _c("span", [_vm._v("Services")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "has-arrow waves-effect",
+        attrs: { href: "javascript: void(0);" }
+      },
+      [
+        _c("i", { staticClass: "fas fa-users" }),
+        _c("span", [_vm._v("Clients")])
       ]
     )
   }

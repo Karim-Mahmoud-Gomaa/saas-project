@@ -72,14 +72,13 @@ const actions = {
         commit(types.LOGOUT);
     },
     async fetchUser({commit}) {
-        axios.defaults.baseURL = '/api/v1/profile'; 
+        axios.defaults.baseURL = '/api/admin'; 
         axios.defaults.headers.common['Authorization'] = 'Bearer '+state.token
-        await axios.get('/').then(response => {
+        await axios.get('/user').then(response => {
             commit(types.FETCH_USER_SUCCESS, response.data.user)
         }).catch((error) => {
             commit(types.FETCH_USER_FAILURE)
         });
-        axios.defaults.baseURL = '/api/v1/admin'; 
     },
 }
 

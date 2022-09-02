@@ -13,9 +13,9 @@
     <meta name="twitter:creator" content="@themetags">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Quiety - Creative SAAS Technology & IT Solutions Bootstrap 5 HTML Template">
-    <meta name="twitter:description" content="Quiety creative Saas, software technology, Saas agency & business Bootstrap 5 Html template. It is best and famous software company and Saas website template.">
-    <meta name="twitter:image" content="#">
     
+    <meta name="twitter:image" content="#">  
+    @yield('seo')
     <!--facebook og-->
     <meta property="og:url" content="#">
     <meta name="twitter:title" content="Quiety - Creative SAAS Technology & IT Solutions Bootstrap 5 HTML Template">
@@ -34,7 +34,6 @@
     <link rel="icon" href="{{asset('assets/web/img/favicon.png')}}" type="image/png" sizes="16x16">
     
     <!--title-->
-    <title>@yield('title')</title>
     
     
     <!--google fonts-->
@@ -63,8 +62,8 @@
         .rtl{
             direction: rtl !important;
         }
-        .lh2{
-            line-height: 1.6;
+        li > .active{
+            font-weight: 600;
         }
         
     </style>

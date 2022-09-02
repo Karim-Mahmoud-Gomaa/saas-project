@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\{OrdersController};
+use App\Http\Controllers\API\ClientsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +16,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {return redirect('admin');});
+// Admin Dashboard
 Route::get('/admin', function () {return view('backEnd');});
 Route::get('/admin/{any}', function ($any) {return view('backEnd');})->where('any', '.*');
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+// Client Website
+Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => ['localeSessionRedirect','localizationRedirect','localeViewPath' ]], function(){
+    //Pages
+    Route::get('/', [App\Http\Controllers\WebCompanyController::class,'home'])->name('home');
+    Route::get('services', [App\Http\Controllers\WebCompanyController::class,'services'])->name('services');
+    Route::get('about_us', [App\Http\Controllers\WebCompanyController::class,'about_us'])->name('about_us');
+    Route::get('services/{slug}', [App\Http\Controllers\WebCompanyController::class,'service']);
+    
+    Route::get('login', [App\Http\Controllers\WebCompanyController::class,'login'])->name('login');
+    Route::get('register', [App\Http\Controllers\WebCompanyController::class,'register']);
+    Route::get('password_reset', [App\Http\Controllers\WebCompanyController::class,'password_reset']);
+    
+    Route::group(['middleware'=>'auth'], function(){
+        Route::get('checkout', [OrdersController::class,'checkout'])->name('checkout');
+        Route::get('checkout/{package}', [OrdersController::class,'addPackage']);
+        Route::delete('destroyPackage/{package}', [OrdersController::class,'destroyPackage'])->name('destroyPackage');
+        Route::resource('orders', OrdersController::class);
+        
+    });
+});
+
+
+Route::post('login', [AuthController::class,'login']);
+Route::group(['middleware'=>'auth'], function(){
+    Route::post('logout', [AuthController::class,'logout'])->name('logout');
+    Route::post('get-promo', [ClientsController::class,'getPromo']);
+});

@@ -146,7 +146,7 @@ export default {
                 this.loader=true
                 this.error=null;
                 this.$store.dispatch("auth/login")
-                axios.defaults.baseURL = '/api/v1/'; 
+                axios.defaults.baseURL = '/api/admin/'; 
 
                this.form.post("login").then(({data}) => {
                     // console.log(data.accessToken);

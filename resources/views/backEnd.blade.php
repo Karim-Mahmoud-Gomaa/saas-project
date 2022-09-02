@@ -32,6 +32,9 @@
             width: 100%;
             height: 100%;
         }
+        /* .card-body{
+            overflow-x: auto;
+        } */
     </style>
 </head>
 
@@ -54,12 +57,12 @@
         <script src="{{ asset('')}}assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
         
        
-        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+        {{-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script>
         
         <script src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
         <!-- App js -->
-        <script src="https://pagination.js.org/dist/2.1.5/pagination.js"></script>
+        {{-- <script src="https://pagination.js.org/dist/2.1.5/pagination.js"></script> --}}
         <script src="{{ asset('js/app.js?v0.1')}}"></script>                
         
         <script src="{{ asset('')}}assets/libs/jquery-steps/build/jquery.steps.min.js"></script>

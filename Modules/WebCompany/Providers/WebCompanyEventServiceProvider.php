@@ -23,7 +23,6 @@ class WebCompanyEventServiceProvider extends ServiceProvider
     {
         
         #bind:Repository
-		$this->app->bind('Modules\WebCompany\Repository\Category\CategoryRepositoryInterface','Modules\WebCompany\Repository\Category\CategoryRepository');
 
 		
     }

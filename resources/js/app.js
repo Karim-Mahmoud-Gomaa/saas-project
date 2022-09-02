@@ -28,6 +28,19 @@ Vue.mixin({
       let val = (num/1).toFixed(fixed).replace('.', '.')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     },
+    getTermLengthName(monthCount) {
+      function getPlural(number, word) {
+        return number === 1 && word.one || word.other;
+      }
+      var months = { one: 'Month', other: 'Months' },
+      years = { one: 'Year', other: 'Years' },
+      m = monthCount % 12,
+      y = Math.floor(monthCount / 12),
+      result = [];
+      m && result.push(m + ' ' + getPlural(m, months));
+      y && result.push(y + ' ' + getPlural(y, years));
+      return result.join(' and ');
+    },
   },
 })
 

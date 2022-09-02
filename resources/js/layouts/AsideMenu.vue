@@ -42,22 +42,43 @@
                     <!--Start Admin Views-->
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="far fa-file-alt"></i><span>Pages</span>
+                            <i class="far fa-file-alt"></i><span>Public</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="true">
-                            <li><router-link :to="{name:'pages'}" tag="a" class="link-page">Active Pages</router-link></li>
-                            <li><router-link :to="{name:'pages-trashed'}" tag="a" class="link-page">Trashed Pages</router-link></li>
+                            <li><router-link :to="{name:'terms'}" tag="a" class="link-page">Term Length</router-link></li>
                         </ul>
                     </li>
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="fa-solid fa-bars-staggered"></i><span>Menus</span>
+                            <i class="far fa-file-alt"></i><span>Pages</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="true">
-                            <li><router-link :to="{name:'menus'}" tag="a" class="link-page">Active Menus</router-link></li>
-                            <li><router-link :to="{name:'menus-trashed'}" tag="a" class="link-page">Trashed Menus</router-link></li>
+                            <li><router-link :to="{name:'pages'}" tag="a" class="link-page">Pages SEO</router-link></li>
+                            <li><router-link :to="{name:'pages-translations'}" tag="a" class="link-page">Pages Content</router-link></li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="far fa-file-alt"></i><span>Services</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li><router-link :to="{name:'services'}" tag="a" class="link-page">Services</router-link></li>
+                            <li><router-link :to="{name:'packages'}" tag="a" class="link-page">Packages</router-link></li>
+                            <li><router-link :to="{name:'features'}" tag="a" class="link-page">Features</router-link></li>
+                            <li><router-link :to="{name:'faq'}" tag="a" class="link-page">FAQs</router-link></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="fas fa-users"></i><span>Clients</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="true">
+                            <li><router-link :to="{name:'renewals'}" tag="a" class="link-page">Renewals</router-link></li>
+                        </ul>
+                    </li>
+                    
+                   
                    
                     <li>
                         <router-link :to="{name:'users'}" tag="a" class="link-page">
