@@ -4,6 +4,7 @@ return [
     'name'=>'Name',
     'email'=>'Email',
     'password'=>'Password',
+    'password_confirmation'=>'Password Confirmation',
     'company'=>'Company Name',
     'no_account'=>'Don’t have an account?',
     'have_account'=>'Already have an account?',

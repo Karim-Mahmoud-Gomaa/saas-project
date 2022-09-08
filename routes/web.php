@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\{OrdersController};
+use App\Http\Controllers\{OrdersController,WebCompanyController};
 use App\Http\Controllers\API\ClientsController;
 /*
 |--------------------------------------------------------------------------
@@ -25,14 +25,17 @@ Route::get('/admin/{any}', function ($any) {return view('backEnd');})->where('an
 // Client Website
 Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => ['localeSessionRedirect','localizationRedirect','localeViewPath' ]], function(){
     //Pages
-    Route::get('/', [App\Http\Controllers\WebCompanyController::class,'home'])->name('home');
-    Route::get('services', [App\Http\Controllers\WebCompanyController::class,'services'])->name('services');
-    Route::get('about_us', [App\Http\Controllers\WebCompanyController::class,'about_us'])->name('about_us');
-    Route::get('services/{slug}', [App\Http\Controllers\WebCompanyController::class,'service']);
+    Route::get('/', [WebCompanyController::class,'home'])->name('home');
+    Route::get('services', [WebCompanyController::class,'services'])->name('services');
+    Route::get('about_us', [WebCompanyController::class,'about_us'])->name('about_us');
+    Route::get('profile', [WebCompanyController::class,'profile'])->name('profile');
+    Route::get('renewals', [WebCompanyController::class,'renewals'])->name('renewals');
+    Route::get('services/{slug}', [WebCompanyController::class,'service']);
     
-    Route::get('login', [App\Http\Controllers\WebCompanyController::class,'login'])->name('login');
-    Route::get('register', [App\Http\Controllers\WebCompanyController::class,'register']);
-    Route::get('password_reset', [App\Http\Controllers\WebCompanyController::class,'password_reset']);
+    Route::get('login', [WebCompanyController::class,'login'])->name('login');
+    Route::get('register', [WebCompanyController::class,'register']);
+    Route::post('register', [AuthController::class,'register']);
+    Route::get('password_reset', [WebCompanyController::class,'password_reset']);
     
     Route::group(['middleware'=>'auth'], function(){
         Route::get('checkout', [OrdersController::class,'checkout'])->name('checkout');

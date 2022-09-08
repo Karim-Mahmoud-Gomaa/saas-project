@@ -71,10 +71,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="javascrept:;" class="btn btn-danger float-end mt-4" :onclick="'event.preventDefault();document.getElementById(delete-form'+index+').submit();'">
+                                        <a href="#" class="btn btn-danger float-end mt-4" :onclick="'event.preventDefault();document.getElementById(\'delete-form'+index+'\').submit();'">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
-                                        <form :id="'delete-form'+index" :action="'/destroyPackage/'+lang" method="POST" style="display: none;">
+                                        <form :id="'delete-form'+index" :action="'/destroyPackage/'+detail.package.id" method="POST" style="display: none;">
                                             @csrf
                                             <input type="hidden" name="_method" value="delete" />
                                         </form>
@@ -101,34 +101,33 @@
                                 <span v-if="getPrice(detail)[0]!=getPrice(detail)[1]" class="float-end text-decoration-line-through text-black-50 me-2">{% moneyFormat(getPrice(detail)[1]) %}</span>
                             </p>
                         </div>
-                        
-                        <hr class="me-5 ms-5">
-                        <div class="card-body pb-5">
-                            <p class="h5">Subtotal</p>
-                            <p class="h5 ms-3">
-                                <span class="float-end">{% moneyFormat(getSubTotalPrice()[0]) %}</span>
-                                <span v-if="getSubTotalPrice()[0]!=getSubTotalPrice()[1]" class="float-end text-decoration-line-through text-black-50 me-2">{% moneyFormat(getSubTotalPrice()[1]) %}</span>
-                            </p>
-                        </div>
-                        <div class="card-body row pb-5">
-                            <p class="h5">Discount
-                                <span class="float-end">{% (getPromo()[0])?moneyFormat(getPromo()[0]):'$0.00' %}</span>
-                                <span v-if="promo.type=='rate'&&promo.value>0" class="float-end text-black-50 me-2 h6">({% moneyFormat(getPromo()[1],2,'%') %})</span>
-                            </p>
-                            <div class="col-6">
-                                <input type="text" id="promo-input" :disabled="!promo.active" :class="'promo-'+(promo.errorText?'danger':(promo.value>0?'success':''))" class="form-control text-center" placeholder="Promo Code" v-model="promo.code">
-                                <p v-if="promo.errorText" class="text-danger text-center">{% promo.errorText %}</p>
+
+                        <template v-if="getTotalPrice()>0">
+                            <hr class="me-5 ms-5">
+                            <div class="card-body pb-5">
+                                <p class="h5">Subtotal</p>
+                                <p class="h5 ms-3">
+                                    <span class="float-end">{% moneyFormat(getSubTotalPrice()[0]) %}</span>
+                                    <span v-if="getSubTotalPrice()[0]!=getSubTotalPrice()[1]" class="float-end text-decoration-line-through text-black-50 me-2">{% moneyFormat(getSubTotalPrice()[1]) %}</span>
+                                </p>
                             </div>
-                            <div class="col-6">
-                                {{-- <a href="javascrept:;" class="btn btn-danger float-end mt-4"><i class="fa-regular fa-pen-to-square"></i></a> --}}
-                                <button v-if="promo.active" type="button" @click="savePromo()" class="btn btn-soft-success btn-icon"><i class="fa-regular fa-floppy-disk"></i></button>
-                                <button v-else type="button" @click="editPromo()" class="btn btn-soft-primary btn-icon"><i class="fa-regular fa-pen-to-square"></i></button>
-                                <button v-if="promo.value>0" type="button" @click="deletePromo()" class="btn btn-soft-danger btn-icon ms-1"><i class="fa-regular fa-circle-xmark"></i></button>
+                            <div class="card-body row pb-5">
+                                <p class="h5">Discount
+                                    <span class="float-end">{% (getPromo()[0])?moneyFormat(getPromo()[0]):'$0.00' %}</span>
+                                    <span v-if="promo.type=='rate'&&promo.value>0" class="float-end text-black-50 me-2 h6">({% moneyFormat(getPromo()[1],2,'%') %})</span>
+                                </p>
+                                <div class="col-6">
+                                    <input type="text" id="promo-input" :disabled="!promo.active" :class="'promo-'+(promo.errorText?'danger':(promo.value>0?'success':''))" class="form-control text-center" placeholder="Promo Code" v-model="promo.code">
+                                    <p v-if="promo.errorText" class="text-danger text-center">{% promo.errorText %}</p>
+                                </div>
+                                <div class="col-6">
+                                    {{-- <a href="javascrept:;" class="btn btn-danger float-end mt-4"><i class="fa-regular fa-pen-to-square"></i></a> --}}
+                                    <button v-if="promo.active" type="button" @click="savePromo()" class="btn btn-soft-success btn-icon"><i class="fa-regular fa-floppy-disk"></i></button>
+                                    <button v-else type="button" @click="editPromo()" class="btn btn-soft-primary btn-icon"><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button v-if="promo.value>0" type="button" @click="deletePromo()" class="btn btn-soft-danger btn-icon ms-1"><i class="fa-regular fa-circle-xmark"></i></button>
+                                </div>
                             </div>
-                            
-                        </div>
-                        
-                        
+                        </template>
                         
                         <hr class="me-5 ms-5">
                         <div class="card-body pb-5">

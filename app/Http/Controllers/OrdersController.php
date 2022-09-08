@@ -21,9 +21,13 @@ class OrdersController extends Controller
     * Display a listing of the resource.
     * @return Response
     */
-    public function index()
+    public function index(Request $request)
     {
-        
+        $data = Page::find(1)->content;
+
+        $orders= Order::index(['*'],['details.package.service','promo'],[],0,['user_id'=>$request->user()->id,'is_active'=>true]);
+        // dd($orders->toArray());
+        return view('orders',compact('orders','data'));
     }
     /**
     * Display a listing of the resource.

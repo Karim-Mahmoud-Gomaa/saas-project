@@ -36,12 +36,12 @@ class OrderRepository implements OrderRepositoryInterface
    
    public function index(array $columns=['*'],array $relations=[],array $appends=[],int $paginate=10,array $filter=[]){
       $data= $this->model->select($columns)->with($relations)
-      ->when(isset($filter['search']),function($q) use($filter){
-         // $q->where('name','like','%'.$filter['search'].'%');
+      ->when(isset($filter['user_id']),function($q) use($filter){
+         $q->where('user_id',$filter['user_id']);
       })
-      ->when(isset($filter['service_id']),function($q) use($filter){
-         $q->where('service_id',$filter['service_id']);
-      })->orderBy('price','asc');
+      ->when(isset($filter['is_active']),function($q) use($filter){
+         $q->where('is_active',$filter['is_active']);
+      })->orderBy('created_at','desc');
       if($paginate>0){$data=$data->paginate($paginate);}else{$data=$data->get();}
       if($appends){foreach ($data as $value) {$value->append($appends);}}
       return $data;
@@ -55,10 +55,15 @@ class OrderRepository implements OrderRepositoryInterface
       $model->update(['is_active'=>true,'promo_id'=>$promo]);
       foreach ($request['cart']['details'] as $key => $value) {
          $detail=OrderDetail::whereId($value['id'])->where('order_id',$model->id)->with('package.terms')->first();
-         $months=array_column($detail->package->terms->toArray(), 'months');
-         $detail->update([
-            'months'=>in_array($value['months'],$months)?$value['months']:$detail->months
-         ]);
+         $months=1;$discount=0;
+         // $months=array_column($detail->package->terms->toArray(), 'months');
+         foreach ($detail->package->terms as $term) {
+            if ($term->months==$value['months']) {
+               $months=$term->months;
+               $discount=$term->pivot->discount;
+            }
+         }
+         $detail->update(['months'=>$months,'discount'=>$discount]);
       }
       // DB::rollBack();
       DB::commit();
@@ -95,6 +100,7 @@ class OrderRepository implements OrderRepositoryInterface
             'package_id'=>$package->id,
             'price'=>$package->price,
             'months'=>$term->months,
+            'discount'=>$term->pivot->discount,
          ]);
       }
       

@@ -3,24 +3,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderDetail extends Model
+class Product extends Model
 {
-    
-    protected $table = 'order_details';
-    public $timestamps =false;  
+    protected $table = 'products';
     protected $guarded = [];
+    protected $dates = ['expired_at'];
     // //////////////////////////////////////////////Attributes
-    public function getTotalAttribute(){
-        $price=$this->months * $this->price;
-        return $price - ($this->discount * ($price / 100));
-    }
+    // public function getContentAttribute(){}
+    
     // //////////////////////////////////////////////relationships
-    public function order()
+    public function user()
     {
-        return $this->belongsTo(Order::class,'order_id');
+        return $this->belongsTo(User::class,'user_id');
     }
     public function package()
     {
         return $this->belongsTo(Package::class,'package_id');
     }
+    
 }

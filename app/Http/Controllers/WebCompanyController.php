@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Repository\Page\PageFacade as Page;
 use App\Repository\Service\ServiceFacade as Service;
+use App\Repository\Product\ProductFacade as Product;
 use App\Repository\PageTranslation\PageTranslationFacade as PageTranslation;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -46,11 +47,18 @@ class WebCompanyController extends Controller
         $service=Service::findBySlug($slug,['*'],['active_packages.features','faq']);
         return view('service',compact('page','service'))->with("data",$this->data);
     }
-    
-    
-    
-    
-    
+
+    public function profile(){
+        return view('profile')->with("data",$this->data);
+    }
+
+    public function renewals(Request $request){
+        $request->validate([
+            'activation'=>'nullable|in:1,0',
+        ]);
+        $products=Product::index(['*'],['package.cervice'],[],0,['is_active']);
+        return view('renewals',compact('products'))->with("data",$this->data);
+    }
     
     public function register(){return view('register');}
     public function password_reset(){return view('password_reset');}

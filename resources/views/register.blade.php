@@ -138,26 +138,34 @@ $lang=LaravelLocalization::getCurrentLocale();
                         <a href="{{ LaravelLocalization::localizeUrl('/') }}" class="mb-5 d-block d-xl-none d-lg-none"><img src="{{asset('')}}assets/web/img/logo-color.png" alt="logo" class="img-fluid"></a>
                         <h1 class="h3 ar-font rtl text-center">@lang('log.signup.title')</h1>
                         <p class="text-muted ar-font rtl text-center">@lang('log.signup.body')</p>
-                        
-                        <form action="{{asset('webcompany/signup')}}" method="POST" class="mt-4 register-form">
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li style="color:#d93846;">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                        <form action="{{asset('register')}}" method="POST" class="mt-4 register-form">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="name" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">@lang('log.name') <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="{{__('log.name')}}" id="name" required aria-label="name">
+                                        <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="{{__('log.name')}}" id="name" required aria-label="name">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 ">
                                     <label for="email" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">@lang('log.email') <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="email" class="form-control" placeholder="{{__('log.email')}}" id="email" required aria-label="email">
+                                        <input type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="{{__('log.email')}}" id="email" required aria-label="email">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <label for="company" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">@lang('log.company')</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="{{__('log.company')}}" id="company" required aria-label="company">
+                                        <input type="text" class="form-control {{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" value="{{ old('company') }}" placeholder="{{__('log.company')}}" id="company" required aria-label="company">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
@@ -165,12 +173,20 @@ $lang=LaravelLocalization::getCurrentLocale();
                                         class="text-danger">*</span>
                                     </label>
                                     <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="{{__('log.password')}}" id="password" required aria-label="Password">
+                                        <input type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{__('log.password')}}" id="password" required aria-label="Password">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <label for="password" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">@lang('log.password_confirmation') <span
+                                        class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group mb-3">
+                                        <input type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password_confirmation" placeholder="{{__('log.password_confirmation')}}" id="password" required aria-label="Password">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check d-flex">
-                                        <input class="form-check-input me-2" type="checkbox" value="" required id="flexCheckChecked">
+                                        <input class="form-check-input me-2" type="checkbox" name="terms" required id="flexCheckChecked">
                                         <label class="form-check-label ar-font rtl" for="flexCheckChecked">
                                             @lang('log.i_read')
                                             <a href="#" class="text-decoration-none">@lang('log.terms_conditions')</a>
