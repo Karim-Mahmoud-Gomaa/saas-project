@@ -19,51 +19,26 @@
 <!--style guide sections start-->
 <section class="style-guide ptb-120">
     <div class="container">
-        @if (count($packages))
+        @if (count($products))
         
         <div class="row">
             <div class="col-12 pe-lg-5">
                 <!--color start-->
                 <div class="row">
                     <div class="col-12">
-                        @foreach ($orders as $order)
+                        
+                        @foreach ($products as $key=>$product)
                         <div class="card rounded-custom mb-5">
                             <div class="card-body p-5">
                                 <h4>
-                                    @lang('web.order_number') #{{$order->id*100}}
-                                    <span class="float-end">@lang('web.total') ${{number_format($order->price,2,'.',',')}}</span>
+                                    #{{$key+1}} {{$product->package->service->name}} ({{$product->package->name}})
+                                    <span class="float-end">@lang('web.expired_at') : {{$product->expired_at->format('d/m/Y')}}</span>
                                 </h4>
-                                <p class="ms-3">
-                                    @lang('web.created_at') : {{$order->created_at->format('d/m/Y')}}
-                                    @if ($order->promo)
-                                    <span class="float-end">@lang('web.promo') {{$order->promo->type=='rate'?'- %':'- $'}}{{number_format($order->promo->value,2,'.',',')}}</span>
+                                <p class="ms-3">{{number_format($product->package->price,2,'.',',')}} / @lang('web.month')
+                                    @if ($product->expired_at<=now())
+                                    <a href="javascrept:;" class="btn btn-info float-end"><i class="fa-solid fa-arrows-rotate"></i> @lang('web.renew') </a>
                                     @endif
                                 </p>
-                                <hr>
-                                <div class="row">
-                                    <table class="table table-borderless">
-                                        <tbody>
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">@lang('web.service') (@lang('web.package'))</th>
-                                                    <th scope="col">@lang('web.months')</th>
-                                                    <th scope="col">@lang('web.discount')</th>
-                                                    <th scope="col">@lang('web.total')</th>
-                                                </tr>
-                                            </thead>
-                                            @foreach ($order->details as $key=>$detail)
-                                            <tr>
-                                                <th scope="row">{{$key+1}}</th>
-                                                <td>{{$detail->package->service->name}} ({{$detail->package->name}})</td>
-                                                <td>{{$detail->months}}</td>
-                                                <td>% {{number_format($detail->discount,2,'.',',')}}</td>
-                                                <td>{{number_format($detail->total,2,'.',',')}}</td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div> 
                             </div>
                         </div>
                         @endforeach
@@ -82,7 +57,8 @@
         </div>
         @endif
     </section>
-<!--style guide sections end-->
-
-@endsection
-
+    <!--style guide sections end-->
+    
+    @endsection
+    
+    

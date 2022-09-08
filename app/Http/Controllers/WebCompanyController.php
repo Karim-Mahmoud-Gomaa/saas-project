@@ -56,7 +56,7 @@ class WebCompanyController extends Controller
         $request->validate([
             'activation'=>'nullable|in:1,0',
         ]);
-        $products=Product::index(['*'],['package.cervice'],[],0,['is_active']);
+        $products=Product::index(['*'],['package.service'],[],0,['is_active']);
         return view('renewals',compact('products'))->with("data",$this->data);
     }
     

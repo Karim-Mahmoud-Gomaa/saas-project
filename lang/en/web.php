@@ -18,6 +18,8 @@ return [
     
     //renewals Page
     'empty_renewals'=>'You Don\'t Have Any Renewal Yet!..',
+    'expired_at'=>'Expired At',
+    'renew'=>'Renew Now',
      
     //Orders Page
     'your_profile'=>'Your Profile',
