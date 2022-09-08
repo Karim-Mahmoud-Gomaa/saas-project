@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('seo')
-<title>@lang('web.renewals')</title>
+<title>{{$product->package->service->name}} ({{$product->package->name}})</title>
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row align-items-center justify-content-between">
             <div class="col-lg-8 col-md-12">
-                <h1 class="display-5 fw-bold">@lang('web.renewals')</h1>
+                <h1 class="display-5 fw-bold">{{$product->package->service->name}} ({{$product->package->name}})</h1>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
                                 <h4>
                                     {{$product->package->service->name}} ({{$product->package->name}})
                                     @if ($product->path)
-                                    <a href="{{ asset($product->path) }}" class="btn btn-info btn-sm float-end">
+                                    <a href="{{ 'https://www.'.$product->path.'.'.request()->getHttpHost() }}" class="btn btn-info btn-sm float-end">
                                         <i class="fa-solid fa-link"></i> @lang('web.go_to_service') 
                                     </a>
                                     @endif
