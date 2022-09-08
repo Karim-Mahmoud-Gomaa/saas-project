@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\{Package,OrderDetail};
 use App\Repository\Promo\PromoFacade;
 use Illuminate\Support\Facades\DB;
+use App\Repository\Product\ProductFacade as Product;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -56,11 +57,15 @@ class OrderRepository implements OrderRepositoryInterface
       foreach ($request['cart']['details'] as $key => $value) {
          $detail=OrderDetail::whereId($value['id'])->where('order_id',$model->id)->with('package.terms')->first();
          $months=1;$discount=0;
-         // $months=array_column($detail->package->terms->toArray(), 'months');
          foreach ($detail->package->terms as $term) {
             if ($term->months==$value['months']) {
                $months=$term->months;
                $discount=$term->pivot->discount;
+               Product::create([
+                  'package_id'=>$detail->package_id,
+                  'user_id'=>Auth::user()->id,
+                  'months'=>$term->months,
+               ]);
             }
          }
          $detail->update(['months'=>$months,'discount'=>$discount]);

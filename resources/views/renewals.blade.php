@@ -4,6 +4,14 @@
 <title>@lang('web.renewals')</title>
 @endsection
 
+@section('css')
+<style>
+    .no-color-change,.no-color-change:hover{
+        color: currentColor!important;
+    }
+</style>
+@endsection
+
 @section('content')
 <!--page header section start-->
 <section class="page-header position-relative overflow-hidden ptb-120 bg-dark" style="background: url('{{asset('')}}assets/web/img/page-header-bg.svg')no-repeat bottom left">
@@ -31,12 +39,17 @@
                         <div class="card rounded-custom mb-5">
                             <div class="card-body p-5">
                                 <h4>
-                                    #{{$key+1}} {{$product->package->service->name}} ({{$product->package->name}})
-                                    <span class="float-end">@lang('web.expired_at') : {{$product->expired_at->format('d/m/Y')}}</span>
+                                    <a href="{{ LaravelLocalization::localizeUrl('/products/'.$product->id) }}" class="no-color-change">
+                                        #{{$key+1}} {{$product->package->service->name}} ({{$product->package->name}})
+                                    </a>
+                                    <span class="float-end {{$product->expired_at->subDays(7)<=now()?'text-danger':''}}">@lang('web.expired_at') : {{$product->expired_at->format('d/m/Y')}}</span>
                                 </h4>
-                                <p class="ms-3">{{number_format($product->package->price,2,'.',',')}} / @lang('web.month')
-                                    @if ($product->expired_at<=now())
-                                    <a href="javascrept:;" class="btn btn-info float-end"><i class="fa-solid fa-arrows-rotate"></i> @lang('web.renew') </a>
+                                <p class="ms-3">
+                                    {{number_format($product->package->price,2,'.',',')}} / @lang('web.month')
+                                    @if ($product->expired_at->subDays(7)<=now())
+                                    <a href="{{ LaravelLocalization::localizeUrl('/checkout/'.$product->package_id) }}" class="btn btn-info float-end">
+                                        <i class="fa-solid fa-arrows-rotate"></i> @lang('web.renew') 
+                                    </a>
                                     @endif
                                 </p>
                             </div>

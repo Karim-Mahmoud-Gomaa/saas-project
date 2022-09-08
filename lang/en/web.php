@@ -16,6 +16,11 @@ return [
     
     'test'=>'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
     
+    //product Page
+    'install'=>'Install',
+    'enter_sub'=>'Enter Your Sub Domain',
+    'go_to_service'=>'Go To Your Service',
+    
     //renewals Page
     'empty_renewals'=>'You Don\'t Have Any Renewal Yet!..',
     'expired_at'=>'Expired At',

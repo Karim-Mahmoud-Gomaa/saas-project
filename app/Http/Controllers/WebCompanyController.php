@@ -59,13 +59,9 @@ class WebCompanyController extends Controller
         $products=Product::index(['*'],['package.service'],[],0,['is_active']);
         return view('renewals',compact('products'))->with("data",$this->data);
     }
-    
+
+
     public function register(){return view('register');}
     public function password_reset(){return view('password_reset');}
-    
-    //actions
-    public function signup(Request $request){return redirect()->route('home');}
-    public function login_company(Request $request){return redirect()->route('home');}
-    public function reset_company(Request $request){return redirect()->route('login');}
     
 }

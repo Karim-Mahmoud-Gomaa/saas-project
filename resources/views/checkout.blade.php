@@ -121,7 +121,7 @@
                                     <p v-if="promo.errorText" class="text-danger text-center">{% promo.errorText %}</p>
                                 </div>
                                 <div class="col-6">
-                                    {{-- <a href="javascrept:;" class="btn btn-danger float-end mt-4"><i class="fa-regular fa-pen-to-square"></i></a> --}}
+                                    {{-- <a href="javascript:;" class="btn btn-danger float-end mt-4"><i class="fa-regular fa-pen-to-square"></i></a> --}}
                                     <button v-if="promo.active" type="button" @click="savePromo()" class="btn btn-soft-success btn-icon"><i class="fa-regular fa-floppy-disk"></i></button>
                                     <button v-else type="button" @click="editPromo()" class="btn btn-soft-primary btn-icon"><i class="fa-regular fa-pen-to-square"></i></button>
                                     <button v-if="promo.value>0" type="button" @click="deletePromo()" class="btn btn-soft-danger btn-icon ms-1"><i class="fa-regular fa-circle-xmark"></i></button>
@@ -175,7 +175,7 @@
                                     <div class="alert alert-danger" role="alert">{%error%}</div>
                                 </template>
                             </template>    
-                            <a href="javascrept:;" @click="changePage(1)" class="btn btn-info"><i class="fa-solid fa-left-long"></i> Back</a>
+                            <a href="javascript:;" @click="changePage(1)" class="btn btn-info"><i class="fa-solid fa-left-long"></i> Back</a>
                             <button type="submit" :disabled="!checkPaymentCard()" @click="saveOrder()" class="btn btn-success float-end">Pay Now <i class="fa-solid fa-money-check"></i></button>
                         </div>
                     </div>
@@ -204,7 +204,6 @@
             delimiters: ['{%', '%}'],
             data() {
                 return {
-                    message: 'Hello Vue!',
                     cart: {!! json_encode($cart->toArray()) !!},
                     lang: "{{ LaravelLocalization::getCurrentLocale() }}",
                     free:"{{__('web.free')}}",
@@ -368,7 +367,6 @@
                             if (data.success) {
                                 window.location.href = "{{ LaravelLocalization::localizeUrl('/orders') }}/"+data.success;
                             }
-                            console.log(data.message);
                         }).catch((error) => {
                             this.errors=error.response.data.errors
                         });

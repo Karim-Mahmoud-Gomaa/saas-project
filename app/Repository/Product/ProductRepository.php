@@ -47,10 +47,12 @@ class ProductRepository implements ProductRepositoryInterface
    public function create(array $data):int{
       
       $model = $this->model->firstOrCreate(
-         ['package_id'=>$data['package_id'],'user_id'=>Auth::user()->id],
-         ['expired_at'=>$data['expired_at'],'is_active'=>1]
+         ['package_id'=>$data['package_id'],'user_id'=>$data['user_id']],
+         ['is_active'=>1]
       );
-      
+      $model->update([
+         'expired_at'=>$model->expired_at->addMonths($data['months']),
+      ]);
       return $model->id; 
    }
    
@@ -59,6 +61,7 @@ class ProductRepository implements ProductRepositoryInterface
       $model->update([
          'expired_at'=>isset($data['expired_at'])?$data['expired_at']:$model->expired_at,
          'is_active'=>isset($data['is_active'])?$data['is_active']:$model->is_active,
+         'path'=>isset($data['path'])?$data['path']:$model->path,
       ]);
       return true;
    }

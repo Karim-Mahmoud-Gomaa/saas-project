@@ -32,7 +32,6 @@ class EventServiceProvider extends ServiceProvider
 
 		$this->app->bind('App\Repository\Term\TermRepositoryInterface','App\Repository\Term\TermRepository');
 		$this->app->bind('App\Repository\Promo\PromoRepositoryInterface','App\Repository\Promo\PromoRepository');
-		$this->app->bind('App\Repository\Renewal\RenewalRepositoryInterface','App\Repository\Renewal\RenewalRepository');
 		$this->app->bind('App\Repository\Order\OrderRepositoryInterface','App\Repository\Order\OrderRepository');
 		$this->app->bind('App\Repository\User\UserRepositoryInterface','App\Repository\User\UserRepository');
 		$this->app->bind('App\Repository\Product\ProductRepositoryInterface','App\Repository\Product\ProductRepository');

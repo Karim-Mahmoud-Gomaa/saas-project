@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\{OrdersController,WebCompanyController};
+use App\Http\Controllers\{OrdersController,ProductsController,WebCompanyController};
 use App\Http\Controllers\API\ClientsController;
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +42,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => ['loc
         Route::get('checkout/{package}', [OrdersController::class,'addPackage']);
         Route::delete('destroyPackage/{package}', [OrdersController::class,'destroyPackage'])->name('destroyPackage');
         Route::resource('orders', OrdersController::class);
+        Route::resource('products', ProductsController::class);
         
     });
 });
@@ -51,4 +52,5 @@ Route::post('login', [AuthController::class,'login']);
 Route::group(['middleware'=>'auth'], function(){
     Route::post('logout', [AuthController::class,'logout'])->name('logout');
     Route::post('get-promo', [ClientsController::class,'getPromo']);
+    Route::post('product-install', [ProductsController::class,'install'])->name('product-install');
 });
