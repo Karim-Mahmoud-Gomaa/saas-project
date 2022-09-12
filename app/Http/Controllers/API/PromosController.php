@@ -13,14 +13,17 @@ class PromosController extends Controller
 
     public function index(Request $request)
     {
-        $success['promos']=Promo::index(['*'],['user'],[],10);
+        $success['promos']=Promo::index(['*'],['user'],['orders_count'],10);
         return response()->json(['success' => $success], $this->successStatus);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'months' => 'required|unique:promos,months',
+            'code' => 'required|unique:promos,code',
+            'value' => 'required|numeric|min:1',
+            'type' => 'required|in:money,rate',
+            'expired_at' => 'nullable|date',
         ]);
         $success = Promo::create($request);
         return response()->json(['success' => $success], $this->successStatus);
@@ -29,7 +32,10 @@ class PromosController extends Controller
     public function update(Request $request,PromoModel $promo)
     {
         $request->validate([
-            'months' => 'required|unique:promos,months,'.$promo->id,
+            'code' => 'required|unique:promos,code,'.$promo->id,
+            'value' => 'required|numeric|min:1',
+            'type' => 'required|in:money,rate',
+            'expired_at' => 'nullable|date',
         ]);
         $success=Promo::update($promo->id,$request);
         return response()->json(['success' => 'success'], $this->successStatus);

@@ -4,34 +4,34 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Repository\Renewal\RenewalFacade as Renewal;
-use App\Models\Renewal as RenewalModel;
+use App\Repository\Product\ProductFacade as Product;
+use App\Models\Product as ProductModel;
 
-class RenewalsController extends Controller
+class ProductsController extends Controller
 {
     public $successStatus = 200;
 
     public function index(Request $request)
     {
-        $success['renewals']=Renewal::index(['*'],['user'],[],10);
+        $success['products']=Product::index(['*'],['user','package.service'],[],10);
         return response()->json(['success' => $success], $this->successStatus);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'months' => 'required|unique:renewals,months',
+            'months' => 'required|unique:products,months',
         ]);
-        $success = Renewal::create($request);
+        $success = Product::create($request);
         return response()->json(['success' => $success], $this->successStatus);
     }
 
-    public function update(Request $request,RenewalModel $renewal)
+    public function update(Request $request,ProductModel $product)
     {
         $request->validate([
-            'months' => 'required|unique:renewals,months,'.$renewal->id,
+            'months' => 'required|unique:products,months,'.$product->id,
         ]);
-        $success=Renewal::update($renewal->id,$request);
+        $success=Product::update($product->id,$request);
         return response()->json(['success' => 'success'], $this->successStatus);
     }
 
@@ -41,9 +41,9 @@ class RenewalsController extends Controller
     * @param    \App\OrderDetail  $client
     * @return  \Illuminate\Http\Response
     */
-    public function destroy(RenewalModel $renewal)
+    public function destroy(ProductModel $product)
     {
-        $success=Renewal::delete($renewal->id);
+        $success=Product::delete($product->id);
         return response()->json(['success' => $success], $this->successStatus);
     }
 

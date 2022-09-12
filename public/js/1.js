@@ -264,6 +264,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var externalScript = document.createElement('script');
@@ -1167,29 +1176,11 @@ var render = function() {
                     "router-link",
                     {
                       staticClass: "link-page",
-                      attrs: { to: { name: "users" }, tag: "a" }
+                      attrs: { to: { name: "promo" }, tag: "a" }
                     },
                     [
-                      _c("i", { staticClass: "fas fa-users" }),
-                      _c("span", [_vm._v("Users")])
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "link-page",
-                      attrs: { to: { name: "roles" }, tag: "a" }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-tags" }),
-                      _c("span", [_vm._v("Roles")])
+                      _c("i", { staticClass: "fas fa-percent" }),
+                      _c("span", [_vm._v("Promo Codes")])
                     ]
                   )
                 ],

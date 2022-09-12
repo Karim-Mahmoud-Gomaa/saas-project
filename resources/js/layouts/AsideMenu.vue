@@ -81,6 +81,13 @@
                    
                    
                     <li>
+                        <router-link :to="{name:'promo'}" tag="a" class="link-page">
+                            <i class="fas fa-percent"></i><span>Promo Codes</span>
+                        </router-link>
+                    </li>
+                    
+                    <!--
+                    <li>
                         <router-link :to="{name:'users'}" tag="a" class="link-page">
                             <i class="fas fa-users"></i><span>Users</span>
                         </router-link>
@@ -90,6 +97,8 @@
                             <i class="fas fa-tags"></i><span>Roles</span>
                         </router-link>
                     </li>
+                    -->                   
+                    
                     <!--end Admin Views-->
 
                 </ul>

@@ -14,9 +14,10 @@ import vSelect from "vue-select";
 ////////////////////////////////////////////
 //vue-moment
 import VueMoment from 'vue-moment'
-import moment from 'moment-timezone'
-moment.tz.setDefault('Etc/GMT+2')
-Vue.use(VueMoment, {moment})
+// import moment from 'moment-timezone'
+// moment.tz.setDefault('Etc/GMT+2')
+// Vue.use(VueMoment, {moment})
+Vue.use(VueMoment)
 
 ////////////////////////////////////////////
 // axios.defaults.baseURL = '/api/v1/';

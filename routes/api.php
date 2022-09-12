@@ -10,7 +10,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\{
     TermsController,
-    RenewalsController,
+    ProductsController,
 };
 
 /*
@@ -35,6 +35,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:api'], function () {
     Route::resource('packages', App\Http\Controllers\API\PackagesController::class);
     Route::resource('features', App\Http\Controllers\API\FeaturesController::class);
     Route::resource('faq', App\Http\Controllers\API\FAQController::class);
+    Route::resource('promos', App\Http\Controllers\API\PromosController::class);
     
     Route::get('locales', function () {
         return response()->json(['success' => LaravelLocalization::getSupportedLocales()], 200);
@@ -78,7 +79,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::match(['put','patch'], '/modules/{module}/disable', [ModuleController::class,'disable'])->middleware('permission:update modules');
         
         Route::resource('terms', TermsController::class);
-        Route::resource('renewals', RenewalsController::class);
+        Route::resource('products', ProductsController::class);
         
         
     });

@@ -14,28 +14,33 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            <div v-if="renewals&&renewals.data.length" class="card-body" >
+                            <div v-if="products&&products.data.length" class="card-body" >
                                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>Service</th>
                                             <th>Client Name</th>
                                             <th>Client Email</th>
                                             <th>Expired At</th>
-                                            <th>Refused At</th>
+                                            <th>Activation</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(renewal,index) in renewals.data">
-                                            <td>{{((renewals.current_page-1)*10)+index+1}}</td>
-                                            <td>{{renewal.user.name}}</td>
-                                            <td>{{renewal.user.email}}</td>
-                                            <td>{{renewal.expired_at| moment("DD/MM/YYYY")}}</td>
-                                            <td>{{renewal.refused_at| moment("DD/MM/YYYY")}}</td>
+                                        <tr v-for="(product,index) in products.data">
+                                            <td>{{((products.current_page-1)*10)+index+1}}</td>
+                                            <td>{{product.package.service.name['en']}} ({{product.package.name['en']}})</td>
+                                            <td>{{product.user.name}}</td>
+                                            <td>{{product.user.email}}</td>
+                                            <td>{{product.expired_at| moment("DD/MM/YYYY")}}</td>
+                                            <td>
+                                                <b v-if="product.is_active" class="text-success">Yes</b>
+                                                <b v-else class="text-danger">No</b>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <pagination-nav v-if="renewals.last_page>1" :renewalSize="renewals.last_page" :currentService="renewals.current_page" :GoToService="fetchData" :loading="loader" />
+                                <pagination-nav v-if="products.last_page>1" :productSize="products.last_page" :currentService="products.current_page" :GoToService="fetchData" :loading="loader" />
                                 </div>
                                 <div v-else class="card-body">
                                     <beat-loader v-if="loader" :loading="loader" color="#5578eb"></beat-loader>
@@ -59,19 +64,19 @@
         export default {
             components: { LayoutDefault, PaginationNav },
             data() {
-                return { renewals: null, loader: false }
+                return { products: null, loader: false }
             },
             created() {
                 this.fetchData();
             },
             methods: {
                 fetchData(num = 1) {
-                    this.renewals = null;
+                    this.products = null;
                     this.loader = true;
-                    let data = { params: { renewal: num } };
-                    axios.get('renewals', data).then(({ data }) => {
-                        this.renewals = data.success.renewals;
-                        if(!data.success.renewals.data.length&&num!=1){this.fetchData(1)}
+                    let data = { params: { product: num } };
+                    axios.get('products', data).then(({ data }) => {
+                        this.products = data.success.products;
+                        if(!data.success.products.data.length&&num!=1){this.fetchData(1)}
                         this.loader = false;
                     });
                 },
