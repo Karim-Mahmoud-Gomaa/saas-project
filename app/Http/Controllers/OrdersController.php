@@ -80,7 +80,7 @@ class OrdersController extends Controller
         if (!$order->is_active||$order->user_id!=Auth::user()->id) {
             abort(404);
         }
-        dd($order->toArray());
+        return view("post_create_order");
     }
     
     /**

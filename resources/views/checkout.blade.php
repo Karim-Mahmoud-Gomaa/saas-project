@@ -35,7 +35,11 @@
 <!--page header section end-->
 <!--style guide sections start-->
 <section class="style-guide ptb-120" id="checkout-page">
-    <div class="container">
+    <div v-if="loading" class="text-center">
+        <img src="{{asset('')}}assets/web/img/loading.svg">
+        <p>Creating Order</p>
+    </div>
+    <div v-else class="container" >
         @if (count($cart->details))
         
         <div class="row">
@@ -68,6 +72,12 @@
                                                     {% term.pivot.discount>0?( '(%' + term.pivot.discount + ')' ) : '' %}
                                                 </option>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-control-label">Type Your Subdomain </label><b class="text-danger">*</b>
+                                            <input class="form-control" v-model="path" type="text" placeholder="Ex: abc" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -205,6 +215,7 @@
             data() {
                 return {
                     cart: {!! json_encode($cart->toArray()) !!},
+                    path: "",
                     lang: "{{ LaravelLocalization::getCurrentLocale() }}",
                     free:"{{__('web.free')}}",
                     promo:{
@@ -221,6 +232,7 @@
                     },
                     page:2,
                     errors:null,
+                    loading: false,
                 }
             },
             methods: {
@@ -361,13 +373,17 @@
                                 year : this.paymentCard.exp.split("/")[1]
                             },
                             cart:this.cart,
+                            path:this.path,
                             promo:this.promo.value?this.promo.code:null
                         }
+                        this.loading = true;
                         axios.post(route,data).then(({ data }) => {
+                            this.loading = false;
                             if (data.success) {
                                 window.location.href = "{{ LaravelLocalization::localizeUrl('/orders') }}/"+data.success;
                             }
                         }).catch((error) => {
+                            this.loading = false;
                             this.errors=error.response.data.errors
                         });
                     }

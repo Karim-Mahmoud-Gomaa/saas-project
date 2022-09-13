@@ -36,8 +36,11 @@ return [
     //Orders Page
     'order_history'=>'Order History',
     'your_orders'=>'Your Orders',
+    "success_order_title"=>"successful order",
+    "success_order_body"=>"Hooray your order created successfully",
     'empty_orders' => 'You Don\'t Have Any Order Yet!..',
     'order_number' => 'Order Number',
+    'domain'=>'Domain',
     'total' => 'Total',
     'created_at' => 'Created At',
     'discount' => 'Discount',

@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Repository\Product\ProductRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class ProductRepository implements ProductRepositoryInterface
@@ -45,14 +46,15 @@ class ProductRepository implements ProductRepositoryInterface
    
    
    public function create(array $data):int{
-      
       $model = $this->model->firstOrCreate(
-         ['package_id'=>$data['package_id'],'user_id'=>$data['user_id']],
-         ['is_active'=>1]
+         [
+            'package_id'=>$data['package_id'],
+            'user_id'=>$data['user_id'],
+            'is_active'=>1,
+            'path'=>$data['path'],
+            'expired_at'=>(Carbon::today())->addMonths($data['months'])
+         ]
       );
-      $model->update([
-         'expired_at'=>$model->expired_at->addMonths($data['months']),
-      ]);
       return $model->id; 
    }
    
