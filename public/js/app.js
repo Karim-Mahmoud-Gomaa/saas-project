@@ -29907,6 +29907,18 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
       var val = (num / 1).toFixed(fixed).replace('.', '.');
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
+    truncate: function truncate(string, maxWords) {
+      var strippedString = $("<p>" + string + "</p>").text().trim();
+      var array = strippedString.split(" ");
+      var wordCount = array.length;
+      var string = array.splice(0, maxWords).join(" ");
+
+      if (wordCount > maxWords) {
+        string += "...";
+      }
+
+      return string;
+    },
     getTermLengthName: function getTermLengthName(monthCount) {
       function getPlural(number, word) {
         return number === 1 && word.one || word.other;
@@ -30293,7 +30305,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
       path: 'features',
       name: 'features',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ../pages/Services/Features */ "./resources/js/pages/Services/Features.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(9)]).then(__webpack_require__.bind(null, /*! ../pages/Services/Features */ "./resources/js/pages/Services/Features.vue"));
       },
       meta: {
         title: 'Features',
@@ -30303,7 +30315,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
       path: 'faq',
       name: 'faq',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(2), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ../pages/Services/FAQ */ "./resources/js/pages/Services/FAQ.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(14)]).then(__webpack_require__.bind(null, /*! ../pages/Services/FAQ */ "./resources/js/pages/Services/FAQ.vue"));
       },
       meta: {
         title: 'FAQs',
@@ -30313,7 +30325,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
       path: 'promo',
       name: 'promo',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5), __webpack_require__.e(1), __webpack_require__.e(23)]).then(__webpack_require__.bind(null, /*! ../pages/Promo/Index */ "./resources/js/pages/Promo/Index.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ../pages/Promo/Index */ "./resources/js/pages/Promo/Index.vue"));
       },
       meta: {
         title: 'Promo Codes',
@@ -30323,7 +30335,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
       path: 'pages',
       name: 'pages',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(10)]).then(__webpack_require__.bind(null, /*! ../pages/Pages/Index */ "./resources/js/pages/Pages/Index.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, /*! ../pages/Pages/Index */ "./resources/js/pages/Pages/Index.vue"));
       },
       meta: {
         title: 'Pages',
@@ -30343,7 +30355,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
       path: 'users',
       name: 'users',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ../pages/Users/Index */ "./resources/js/pages/Users/Index.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(5), __webpack_require__.e(17)]).then(__webpack_require__.bind(null, /*! ../pages/Users/Index */ "./resources/js/pages/Users/Index.vue"));
       },
       meta: {
         title: 'Users',
@@ -30353,7 +30365,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
       path: 'users/:user_id',
       name: 'user_show',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ../pages/Users/Show */ "./resources/js/pages/Users/Show.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(5), __webpack_require__.e(22)]).then(__webpack_require__.bind(null, /*! ../pages/Users/Show */ "./resources/js/pages/Users/Show.vue"));
       },
       meta: {
         title: 'User Details',
@@ -30363,7 +30375,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
       path: 'roles',
       name: 'roles',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ../pages/Roles/Index */ "./resources/js/pages/Roles/Index.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(16)]).then(__webpack_require__.bind(null, /*! ../pages/Roles/Index */ "./resources/js/pages/Roles/Index.vue"));
       },
       meta: {
         title: 'Roles',
@@ -30373,7 +30385,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
       path: 'roles/:role_id',
       name: 'role_show',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5), __webpack_require__.e(1), __webpack_require__.e(3), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! ../pages/Roles/Show */ "./resources/js/pages/Roles/Show.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(2), __webpack_require__.e(1), __webpack_require__.e(4), __webpack_require__.e(21)]).then(__webpack_require__.bind(null, /*! ../pages/Roles/Show */ "./resources/js/pages/Roles/Show.vue"));
       },
       meta: {
         title: 'Role Details',
@@ -30723,7 +30735,7 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\projects\saas\saas\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\bzns\saas\2-8-22\saas-frontend - Copy\resources\js\app.js */"./resources/js/app.js");
 
 
 /***/ })

@@ -20,10 +20,6 @@ class FeaturesController extends Controller
 
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|string',
-        //     'phone' => 'required|unique:clients,phone',
-        // ]);
         $success = Feature::create($request);
         return response()->json(['success' => $success], $this->successStatus);
     }

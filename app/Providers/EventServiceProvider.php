@@ -35,6 +35,7 @@ class EventServiceProvider extends ServiceProvider
 		$this->app->bind('App\Repository\Order\OrderRepositoryInterface','App\Repository\Order\OrderRepository');
 		$this->app->bind('App\Repository\User\UserRepositoryInterface','App\Repository\User\UserRepository');
 		$this->app->bind('App\Repository\Product\ProductRepositoryInterface','App\Repository\Product\ProductRepository');
+		$this->app->bind('App\Repository\Payment\PaymentRepositoryInterface','App\Repository\Payment\PaymentRepository');
     }
     /**
      * Register any events for your application.

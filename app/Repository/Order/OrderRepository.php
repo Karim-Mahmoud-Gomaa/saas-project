@@ -13,7 +13,7 @@ use App\Models\{Package,OrderDetail};
 use App\Repository\Promo\PromoFacade;
 use Illuminate\Support\Facades\DB;
 use App\Repository\Product\ProductFacade as Product;
-use App\Services\DeployService;
+use App\Repository\Payment\PaymentFacade as Payment;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -66,13 +66,12 @@ class OrderRepository implements OrderRepositoryInterface
                   'package_id'=>$detail->package_id,
                   'user_id'=>Auth::user()->id,
                   'months'=>$term->months,
-                  'path'=>$request["path"]
                ]);
-               DeployService::deploy($request["path"]);
             }
          }
-         $detail->update(['months'=>$months,'discount'=>$discount,'path'=>$request["path"]]);
+         $detail->update(['months'=>$months,'discount'=>$discount]);
       }
+      Payment::Charge(Auth::user()->id,$model->price,$request->payment_method);
       // DB::rollBack();
       DB::commit();
       return $model->id; 

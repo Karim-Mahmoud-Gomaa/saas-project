@@ -30,7 +30,7 @@ $lang=LaravelLocalization::getCurrentLocale();
                                             </ul>
                                         </div>
                                         <blockquote>
-                                            <h5>The Best Saas You Got to Have it!</h5>
+                                            <h5>The Best Template You Got to Have it!</h5>
                                             Globally network long-term high-impact schemas vis-a-vis distinctive
                                             e-commerce
                                             cross-media infrastructures rather than ethical sticky alignments rather

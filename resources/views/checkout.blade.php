@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('seo')
-<title>{{$page->name}}</title>
+<title>@lang('web.checkout')</title>
 @endsection
 @section('css')
 <style>
@@ -27,7 +27,7 @@
     <div class="container">
         <div class="row align-items-center justify-content-between">
             <div class="col-lg-8 col-md-12">
-                <h1 class="display-5 fw-bold">{{$page->content[39]}}</h1>
+                <h1 class="display-5 fw-bold">@lang('web.shopping_cart')</h1>
             </div>
         </div>
     </div>
@@ -35,11 +35,7 @@
 <!--page header section end-->
 <!--style guide sections start-->
 <section class="style-guide ptb-120" id="checkout-page">
-    <div v-if="loading" class="text-center">
-        <img src="{{asset('')}}assets/web/img/loading.svg">
-        <p>Creating Order</p>
-    </div>
-    <div v-else class="container" >
+    <div class="container">
         @if (count($cart->details))
         
         <div class="row">
@@ -75,12 +71,6 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group mb-3">
-                                            <label class="form-control-label">Type Your Subdomain </label><b class="text-danger">*</b>
-                                            <input class="form-control" v-model="path" type="text" placeholder="Ex: abc" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
                                         <a href="#" class="btn btn-danger float-end mt-4" :onclick="'event.preventDefault();document.getElementById(\'delete-form'+index+'\').submit();'">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
@@ -111,7 +101,7 @@
                                 <span v-if="getPrice(detail)[0]!=getPrice(detail)[1]" class="float-end text-decoration-line-through text-black-50 me-2">{% moneyFormat(getPrice(detail)[1]) %}</span>
                             </p>
                         </div>
-
+                        
                         <template v-if="getTotalPrice()>0">
                             <hr class="me-5 ms-5">
                             <div class="card-body pb-5">
@@ -157,24 +147,57 @@
                         <hr class="me-5 ms-5">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label">Card Number <b class="text-danger">*</b></label>
-                                        <input class="form-control" @keypress="isNumber($event)" v-model="paymentCard.num" type="text" placeholder="Enter your Card Number">
-                                    </div>                            
+                                @if (count($payment_methods))
+                                <div class="row">
+                                    @foreach ($payment_methods as $key=>$payment_method)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" v-model="payment_method" name="payment_method" value="{{$payment_method->id}}" id="flexRadioDefault{{$key+1}}" {{$loop->first?'checked':''}}>
+                                        <label class="form-check-label" for="flexRadioDefault{{$key+1}}">
+                                            {{$payment_method->billing_details->name}} <br>
+                                            {{$payment_method->card->brand}} ***{{$payment_method->card->last4}} 
+                                        </label>
+                                    </div>
+                                    @endforeach
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" v-model="payment_method" name="payment_method" value="" id="flexRadioDefault0" >
+                                        <label class="form-check-label" for="flexRadioDefault0">
+                                            New Payment Method
+                                        </label>
+                                    </div>    
                                 </div>
-                                <div class="col-6">
+                                @endif
+                                
+                                <form v-show="!payment_method">
+                                    
+                                    <div class="form-group mb-4">
+                                        <label for="name">Name on Card</label>
+                                        <input type="text" class="form-control" v-model="ccName" />
+                                    </div>
+                                    
                                     <div class="form-group">
-                                        <label class="form-control-label">Expiration Date <b class="text-danger">*</b></label>
-                                        <input class="form-control" @keypress="isDate($event)" v-model="paymentCard.exp" type="text" placeholder="MM/YY">
-                                    </div>                            
-                                </div>
-                                <div class="col-6">
+                                        <label for="card-number">Credit Card Number</label>
+                                        <span id="card-number" class="form-control stripe-element-container">
+                                            <!-- Stripe Card Element -->
+                                        </span>
+                                    </div>
+                                    
                                     <div class="form-group">
-                                        <label class="form-control-label">Security Code <b class="text-danger">*</b></label>
-                                        <input class="form-control" @keypress="isNumber($event)" v-model="paymentCard.code" type="text" placeholder="CVV">
-                                    </div>                            
-                                </div>
+                                        <label for="card-cvc">CVC Number</label>
+                                        <span id="card-cvc" class="form-control stripe-element-container">
+                                            <!-- Stripe CVC Element -->
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="card-exp">Expiration</label>
+                                        <span id="card-exp" class="form-control stripe-element-container">
+                                            <!-- Stripe Card Expiry Element -->
+                                        </span>
+                                    </div>
+                                    
+                                    {{-- <button @click.prevent="paymentSubmit" class="btn btn-primary mt-1 float-right">Submit Payment</button> --}}
+                                    
+                                </form>
                             </div>
                         </div>
                         
@@ -186,7 +209,7 @@
                                 </template>
                             </template>    
                             <a href="javascript:;" @click="changePage(1)" class="btn btn-info"><i class="fa-solid fa-left-long"></i> Back</a>
-                            <button type="submit" :disabled="!checkPaymentCard()" @click="saveOrder()" class="btn btn-success float-end">Pay Now <i class="fa-solid fa-money-check"></i></button>
+                            <button type="submit" @click="saveOrder()" class="btn btn-success float-end">Pay Now <i class="fa-solid fa-money-check"></i></button>
                         </div>
                     </div>
                 </div>
@@ -206,16 +229,17 @@
     @endsection
     @section('js')
     @if (count($cart->details))
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="https://unpkg.com/vue@3"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
     <script>
+        let stripe;
         const { createApp } = Vue
         createApp({
             delimiters: ['{%', '%}'],
             data() {
                 return {
                     cart: {!! json_encode($cart->toArray()) !!},
-                    path: "",
                     lang: "{{ LaravelLocalization::getCurrentLocale() }}",
                     free:"{{__('web.free')}}",
                     promo:{
@@ -225,17 +249,77 @@
                         value:0,
                         errorText:null,
                     },
-                    paymentCard:{
-                        num:'0123456789123456',
-                        exp:'12/25',
-                        code:'1324',
-                    },
-                    page:2,
+                    payment_method:"{{count($payment_methods)?$payment_methods[0]->id:''}}",
+                    cardElement:null,
+                    page:1,
                     errors:null,
-                    loading: false,
                 }
             },
+            mounted: function() {
+                const style = {
+                    base: {
+                        'fontSize': '16px',
+                        'color': '#495057',
+                        'fontFamily': 'apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif'
+                    }
+                };
+                stripe = Stripe('pk_test_51LeyNHENbOgVwcDpmU9fhiz2MNRaCf3mKkgCvgvliDHnIWxDBbdhEkfipG8zP4Th6orsRubHmAUsFFj0Hze6HOLi00c8kxMR7j');
+                const elements = stripe.elements();
+                // Card number
+                this.card = elements.create('cardNumber', {
+                    'placeholder': 'cardNumber',
+                    'style': style
+                });
+                this.card.mount('#card-number');
+                
+                // CVC
+                this.cvc = elements.create('cardCvc', {
+                    'placeholder': 'CVC',
+                    'style': style
+                });
+                this.cvc.mount('#card-cvc');
+                
+                // Card expiry
+                this.exp = elements.create('cardExpiry', {
+                    'placeholder': 'MM/YY',
+                    'style': style
+                });
+                this.exp.mount('#card-exp');
+                
+                
+                // this.drowCardElements()
+            },
             methods: {
+                drowCardElements(){
+                    stripe = Stripe('pk_test_51LeyNHENbOgVwcDpmU9fhiz2MNRaCf3mKkgCvgvliDHnIWxDBbdhEkfipG8zP4Th6orsRubHmAUsFFj0Hze6HOLi00c8kxMR7j');
+                    const elements = stripe.elements({
+                        fonts: [
+                        {
+                            cssSrc: "https://rsms.me/inter/inter.css"
+                        }
+                        ],
+                        locale: window.__exampleLocale
+                    });
+                    this.cardElement = elements.create("card", {
+                        style: {
+                            base: {
+                                color: "#32325D",
+                                fontWeight: 500,
+                                fontFamily: "Inter, Open Sans, Segoe UI, sans-serif",
+                                fontSize: "16px",
+                                fontSmoothing: "antialiased",
+                                
+                                "::placeholder": {
+                                    color: "#CFD7DF"
+                                }
+                            },
+                            invalid: {
+                                color: "#E25950"
+                            }
+                        }
+                    });
+                    this.cardElement.mount('#card-element');
+                },
                 changed(event,detail){
                     let id=event.target.value;
                     detail=JSON.parse(JSON.stringify(detail))
@@ -327,6 +411,7 @@
                 },
                 changePage(num) {
                     this.page=num;
+                    // this.drowCardElements()
                 },
                 isNumber(event) {
                     event = (event) ? event : window.event;
@@ -337,56 +422,39 @@
                         return true;
                     }
                 },
-                isDate(event) {
-                    if(this.paymentCard.exp&&this.paymentCard.exp.length>=5){
-                        event.preventDefault();
-                    }
-                    event = (event) ? event : window.event;
-                    var charCode = (event.which) ? event.which : event.keyCode;
-                    if ((charCode > 31 && (charCode < 48 || charCode > 57)) ) {
-                        event.preventDefault();;
-                    } else {
-                        if(this.paymentCard.exp&&this.paymentCard.exp.length==2){
-                            this.paymentCard.exp+='/';
-                        }
-                        return true;
-                    }
-                },
-                checkPaymentCard() {
-                    if(
-                    !this.paymentCard.exp||!this.paymentCard.code||!this.paymentCard.num||
-                    this.paymentCard.num.length<16||this.paymentCard.exp.length<5||
-                    this.paymentCard.code.length<3
-                    ){
-                        return false;
-                    }
-                    return true;
-                    
-                },
-                saveOrder() {
-                    if (this.checkPaymentCard()) {
-                        let route="{{ LaravelLocalization::localizeUrl('/orders') }}";
-                        let data={
-                            paymentCard:{
-                                ...this.paymentCard,
-                                month : this.paymentCard.exp.split("/")[0],
-                                year : this.paymentCard.exp.split("/")[1]
-                            },
-                            cart:this.cart,
-                            path:this.path,
-                            promo:this.promo.value?this.promo.code:null
-                        }
-                        this.loading = true;
-                        axios.post(route,data).then(({ data }) => {
-                            this.loading = false;
-                            if (data.success) {
-                                window.location.href = "{{ LaravelLocalization::localizeUrl('/orders') }}/"+data.success;
+                async saveOrder() {
+                    let payment_method=this.payment_method;
+                    if (payment_method.length==0&&this.ccName.length) {
+                        let that=this
+                        const { setupIntent, error } = await stripe.confirmCardSetup(
+                        "{{ $intent->client_secret }}", {
+                            payment_method: {
+                                card: that.card,
+                                billing_details: { name: that.ccName }
                             }
-                        }).catch((error) => {
-                            this.loading = false;
-                            this.errors=error.response.data.errors
-                        });
+                        }
+                        );
+                        
+                        if (error) {
+                            console.log(error.message);
+                        } else {
+                            payment_method=setupIntent.payment_method
+                        }
                     }
+                    
+                    let route="{{ LaravelLocalization::localizeUrl('/orders') }}";
+                    let data={
+                        payment_method:payment_method,
+                        cart:this.cart,
+                        promo:this.promo.value?this.promo.code:null
+                    }
+                    axios.post(route,data).then(({ data }) => {
+                        if (data.success) {
+                            window.location.href = "{{ LaravelLocalization::localizeUrl('/orders') }}/"+data.success;
+                        }
+                    }).catch((error) => {
+                        this.errors=error.response.data.errors
+                    });
                 },
             }
         }).mount('#checkout-page')

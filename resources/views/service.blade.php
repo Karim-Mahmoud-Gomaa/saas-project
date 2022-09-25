@@ -28,27 +28,27 @@
         <div class="row">
             @foreach ($service->active_packages as $index=>$package)
             @php
-                if($index%2){
-                    $card_class="bg-dark text-white p-5 mb-4 mb-lg-0";
-                    $text_class="text-warning";
-                    $btn_class="btn-primary";
-                }else {
-                    $card_class="rounded-custom bg-white custom-shadow p-5 mb-4 mb-lg-0";
-                    $text_class="text-primary";
-                    $btn_class="btn-outline-primary";
-                }
-                $count=count($service->active_packages);
-                $col=$count>=3?"col-lg-4 col-md-6":($count==2?"col-md-6":"col-md-12");
+            if($index%2){
+                $card_class="bg-dark text-white p-5 mb-4 mb-lg-0";
+                $text_class="text-warning";
+                $btn_class="btn-primary";
+            }else {
+                $card_class="rounded-custom bg-white custom-shadow p-5 mb-4 mb-lg-0";
+                $text_class="text-primary";
+                $btn_class="btn-outline-primary";
+            }
+            $count=count($service->active_packages);
+            $col=$count>=3?"col-lg-4 col-md-6":($count==2?"col-md-6":"col-md-12");
             @endphp
-                
+            
             <div class="{{$col}}">
                 <div class="position-relative single-pricing-wrap rounded-custom p-5 mb-4 mb-lg-0 {{$card_class}}">
                     <div class="pricing-header mb-32">
                         <h3 class="package-name {{$text_class}} d-block">{{$package->name}}</h3>
                         @if ($package->price>0)
-                        <h4 class="display-6 fw-semi-bold">${{number_format($package->price,($package->price%1?2:0),".",",")}}<span>/{{$page->content[13]}}</span></h4>
+                        <h4 class="display-6 fw-semi-bold">${{number_format($package->price,($package->price%1?2:0),".",",")}}<span>/@lang('web.month')</span></h4>
                         @else
-                        <h4 class="display-6 fw-semi-bold">{{$data[25]}}</h4>
+                        <h4 class="display-6 fw-semi-bold">@lang('web.free')</h4>
                         @endif
                     </div>
                     <div class="pricing-info mb-4">
@@ -58,7 +58,11 @@
                             @endforeach
                         </ul>
                     </div>
-                    <a href="{{ LaravelLocalization::localizeUrl('/checkout/'.$package->id) }}" class="btn {{$btn_class}} mt-2">{{$data[17]}}</a>
+                    @if (Auth::check())
+                    <a href="{{ LaravelLocalization::localizeUrl('/checkout/'.$package->id) }}" class="btn {{$btn_class}} mt-2">@lang('web.buy_now')</a>
+                    @else
+                    <a href="{{ LaravelLocalization::localizeUrl('/login') }}" class="btn {{$btn_class}} mt-2">@lang('web.buy_now')</a>
+                    @endif
                 </div> 
             </div>
             @endforeach
@@ -74,7 +78,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-7 col-12">
                 <div class="section-heading text-center">
-                    <h4 class="h5 text-primary">{{$data[14]}}</h4>
+                    <h4 class="h5 text-primary">@lang('web.faq')</h4>
                     <h2>{{$page->content[15]}}</h2>
                     <p>{{$page->content[16]}}</p>
                 </div>

@@ -6,28 +6,28 @@
             <div class="col-lg-8 col-md-10">
                 <div class="subscribe-info-wrap text-center position-relative z-2">
                     <div class="section-heading">
-                        <h4 class="h5 text-warning">{{$data[10]}}</h4>
-                        <h2>{{$data[11]}}</h2>
-                        <p>{{$data[12]}}</p>
+                        <h4 class="h5 text-warning">@lang('web.lets_try')</h4>
+                        <h2>@lang('web.start_14_day')</h2>
+                        <p>@lang('web.We_can_help')</p>
                     </div>
                     <div class="form-block-banner mw-60 m-auto mt-5">
                         <a href="contact-us.html" class="btn btn-primary">Contact with Us</a>
                         <a href="http://www.youtube.com/watch?v=hAP2QF--2Dg" class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn ms-lg-3 ms-md-3 mt-3 mt-lg-0">
-                            <i class="fas fa-play"></i> {{$data[20]}}
+                            <i class="fas fa-play"></i> @lang('web.watch_demo')
                         </a>
                     </div>
                     <ul class="nav justify-content-center subscribe-feature-list mt-4">
                         <li class="nav-item">
-                            <span><i class="far fa-check-circle text-primary me-2"></i>{{$data[21]}}</span>
+                            <span><i class="far fa-check-circle text-primary me-2"></i>@lang('web.14_day_trial')</span>
                         </li>
                         <li class="nav-item">
-                            <span><i class="far fa-check-circle text-primary me-2"></i>{{$data[22]}}</span>
+                            <span><i class="far fa-check-circle text-primary me-2"></i>@lang('web.no_credit_card_required')</span>
                         </li>
                         <li class="nav-item">
-                            <span><i class="far fa-check-circle text-primary me-2"></i>{{$data[23]}}</span>
+                            <span><i class="far fa-check-circle text-primary me-2"></i>@lang('web.support_24')</span>
                         </li>
                         <li class="nav-item">
-                            <span><i class="far fa-check-circle text-primary me-2"></i>{{$data[24]}}</span>
+                            <span><i class="far fa-check-circle text-primary me-2"></i>@lang('web.cancel_anytime')</span>
                         </li>
                     </ul>
                 </div>
@@ -45,28 +45,28 @@
                 <div class="col-lg-7 col-md-8">
                     <div class="subscribe-info-wrap text-center position-relative z-2">
                         <div class="section-heading">
-                            <h4 class="h5 text-warning">{{$data[10]}}</h4>
-                            <h2>{{$data[11]}}</h2>
-                            <p>{{$data[12]}}</p>
+                            <h4 class="h5 text-warning">@lang('web.lets_try')</h4>
+                            <h2>@lang('web.start_14_day')</h2>
+                            <p>@lang('web.We_can_help')</p>
                         </div>
                         <div class="form-block-banner mw-60 m-auto mt-5">
                             <a href="contact-us.html" class="btn btn-primary">Contact with Us</a>
                             <a href="http://www.youtube.com/watch?v=hAP2QF--2Dg" class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn ms-lg-3 ms-md-3 mt-3 mt-lg-0"> 
-                                <i class="fas fa-play"></i> {{$data[20]}}
+                                <i class="fas fa-play"></i> @lang('web.watch_demo')
                             </a>
                         </div>
                         <ul class="nav justify-content-center subscribe-feature-list mt-4">
                             <li class="nav-item">
-                                <span><i class="far fa-check-circle text-primary me-2"></i>{{$data[21]}}</span>
+                                <span><i class="far fa-check-circle text-primary me-2"></i>@lang('web.14_day_trial')</span>
                             </li>
                             <li class="nav-item">
-                                <span><i class="far fa-check-circle text-primary me-2"></i>{{$data[22]}}</span>
+                                <span><i class="far fa-check-circle text-primary me-2"></i>@lang('web.no_credit_card_required')</span>
                             </li>
                             <li class="nav-item">
-                                <span><i class="far fa-check-circle text-primary me-2"></i>{{$data[23]}}</span>
+                                <span><i class="far fa-check-circle text-primary me-2"></i>@lang('web.support_24')</span>
                             </li>
                             <li class="nav-item">
-                                <span><i class="far fa-check-circle text-primary me-2"></i>{{$data[24]}}</span>
+                                <span><i class="far fa-check-circle text-primary me-2"></i>@lang('web.cancel_anytime')</span>
                             </li>
                         </ul>
                     </div>

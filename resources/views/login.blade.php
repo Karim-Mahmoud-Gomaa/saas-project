@@ -21,38 +21,38 @@ $lang=LaravelLocalization::getCurrentLocale();
                     <div class="action-btns">
                         <a href="#" class="btn google-btn bg-white shadow-sm mt-4 d-block d-flex align-items-center text-decoration-none justify-content-center">
                             <img src="{{asset('assets/web/img/google-icon.svg')}}" alt="google" class="me-3">
-                            <span class="ar-font">{{$page->content[29]}}</span>
+                            <span class="ar-font">{{__('web.connect_with_google')}}</span>
                         </a>
                     </div>
                     <div class="position-relative d-flex align-items-center justify-content-center mt-4 py-4">
                         <span class="divider-bar"></span>
-                        <h6 class="position-absolute text-center divider-text bg-light mb-0 ar-font">{{$page->content[30]}}</h6>
+                        <h6 class="position-absolute text-center divider-text bg-light mb-0 ar-font">@lang('web.or')</h6>
                     </div>
                     <form action="{{asset('login')}}" method="POST" class="mt-4 register-form">
                         @csrf
                         <div class="row">
                             <div class="col-sm-12">
-                                <label for="email" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">{{$page->content[31]}} <span class="text-danger">*</span></label>
+                                <label for="email" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">{{__('web.email')}} <span class="text-danger">*</span></label>
                                 <div class="input-group mb-3">
-                                    <input type="email" class="form-control" placeholder="{{$page->content[31]}}" name="email" value="user@test.com" required aria-label="email">
+                                    <input type="email" class="form-control" placeholder="{{__('web.email')}}" name="email" value="user@test.com" required aria-label="email">
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <label for="password" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">{{$page->content[32]}} <span
+                                <label for="password" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">{{__('web.password')}} <span
                                     class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="{{$page->content[32]}}" name="password" value="password" required aria-label="Password">
+                                        <input type="password" class="form-control" placeholder="{{__('web.password')}}" name="password" value="password" required aria-label="Password">
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary mt-3 d-block w-100 ar-font text-center">{{$page->content[33]}}</button>
+                                    <button type="submit" class="btn btn-primary mt-3 d-block w-100 ar-font text-center">{{__('web.login')}}</button>
                                 </div>
                             </div>
                             <p class="font-monospace fw-medium text-center text-muted mt-3 pt-4 mb-0">
-                                {{$page->content[34]}}
-                                <a href="{{ LaravelLocalization::localizeUrl('register') }}" class="text-decoration-none ar-font">{{$page->content[35]}}</a>
+                                {{__('web.dont_have_an_account')}}
+                                <a href="{{ LaravelLocalization::localizeUrl('register') }}" class="text-decoration-none ar-font">{{__('web.sign_up_today')}}</a>
                                 <br>
-                                <a href="{{ LaravelLocalization::localizeUrl('password_reset') }}" class="text-decoration-none ar-font">{{$page->content[36]}}</a>
+                                <a href="{{ LaravelLocalization::localizeUrl('password_reset') }}" class="text-decoration-none ar-font">{{__('web.forgot_password')}}</a>
                             </p>
                         </form>
                     </div>

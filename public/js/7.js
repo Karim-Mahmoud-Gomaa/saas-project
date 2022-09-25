@@ -919,7 +919,7 @@ var render = function() {
                                       _vm._s(
                                         _vm.truncate(
                                           translation.content["en"],
-                                          50
+                                          10
                                         )
                                       )
                                     )

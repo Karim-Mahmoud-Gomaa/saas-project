@@ -11,17 +11,11 @@ use App\Repository\Product\ProductFacade as Product;
 
 class ProductsController extends Controller
 {
-    public $data = null;
     public $successStatus = 200;
-
-    public function __construct()
-    {
-        $this->data = Page::find(1)->content;
-    }
 
     public function show(ProductModel $product){
         $product=Product::find($product->id,['*'],['package.service']);
-        return view('product',compact('product'))->with("data",$this->data);
+        return view('product',compact('product'));
     }
 
     public function install(Request $request){

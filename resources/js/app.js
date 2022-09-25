@@ -29,6 +29,18 @@ Vue.mixin({
       let val = (num/1).toFixed(fixed).replace('.', '.')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     },
+    truncate:function(string, maxWords) {   
+      var strippedString = $("<p>" + string + "</p>").text().trim();      
+      var array = strippedString.split(" ");
+      var wordCount = array.length;
+      var string = array.splice(0, maxWords).join(" ");
+      
+      if(wordCount > maxWords) {
+        string += "...";
+      }
+      
+      return string ;
+    },
     getTermLengthName(monthCount) {
       function getPlural(number, word) {
         return number === 1 && word.one || word.other;

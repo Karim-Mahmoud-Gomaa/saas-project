@@ -21,5 +21,15 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        // $this->call(PagePagesTableSeeder::class);
+        $this->call(PageTranslationsTableSeeder::class);
+        $this->call(PagesTableSeeder::class);
+        $this->call(TermsTableSeeder::class);
+        $this->call(TermPackagesTableSeeder::class);
+        $this->call(ServicesTableSeeder::class);
+        $this->call(PackagesTableSeeder::class);
+        $this->call(PackageFeaturesTableSeeder::class);
+        $this->call(FeaturesTableSeeder::class);
+        $this->call(FaqTableSeeder::class);
     }
 }

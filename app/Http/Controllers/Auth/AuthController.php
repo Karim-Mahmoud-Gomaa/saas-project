@@ -32,7 +32,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'company'=> 'nullable|string|max:100',
             'password'=> 'required|confirmed|string|min:8',
-            'terms'=> 'required',
+            // 'terms'=> 'required',
         ]);
         $auth=User::create($request);
         if ($auth) {

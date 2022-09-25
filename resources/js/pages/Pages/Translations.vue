@@ -32,7 +32,7 @@
                                     <tbody>
                                         <tr v-for="(translation,index) in translations.data">
                                             <td>{{translations.current_page*(index+1)}}</td>
-                                            <td>{{truncate(translation.content['en'], 50)}}</td>
+                                            <td>{{truncate(translation.content['en'], 10)}}</td>
                                             <td>{{translation.page.name}}</td>
                                             <td>
                                                 <template v-for="(lang,index) in locales">

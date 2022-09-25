@@ -6,7 +6,6 @@ use App\Models\Product;
 use App\Repository\Product\ProductRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 
 class ProductRepository implements ProductRepositoryInterface
@@ -46,15 +45,14 @@ class ProductRepository implements ProductRepositoryInterface
    
    
    public function create(array $data):int{
+      
       $model = $this->model->firstOrCreate(
-         [
-            'package_id'=>$data['package_id'],
-            'user_id'=>$data['user_id'],
-            'is_active'=>1,
-            'path'=>$data['path'],
-            'expired_at'=>(Carbon::today())->addMonths($data['months'])
-         ]
+         ['package_id'=>$data['package_id'],'user_id'=>$data['user_id']],
+         ['is_active'=>1]
       );
+      $model->update([
+         'expired_at'=>($model->expired_at)?$model->expired_at->addMonths($data['months']):now()->addMonths($data['months']),
+      ]);
       return $model->id; 
    }
    
@@ -64,6 +62,7 @@ class ProductRepository implements ProductRepositoryInterface
          'expired_at'=>isset($data['expired_at'])?$data['expired_at']:$model->expired_at,
          'is_active'=>isset($data['is_active'])?$data['is_active']:$model->is_active,
          'path'=>isset($data['path'])?$data['path']:$model->path,
+         'payment_id'=>isset($data['payment_id'])?$data['payment_id']:$model->payment_id,
       ]);
       return true;
    }
@@ -73,6 +72,12 @@ class ProductRepository implements ProductRepositoryInterface
       return ($model->delete())?true:false;
    }
    
+   
+   public function updatePayment(int $user_id,string $old_payment_id,string $new_payment_id):bool{
+      $model=$this->model->where('user_id',$user_id)->where('payment_id',$old_payment_id)
+      ->update(['payment_id'=>$new_payment_id]);
+      return true;
+   }
 
    
 }

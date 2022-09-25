@@ -9,10 +9,6 @@ use Illuminate\Routing\Controller;
 use App\Repository\Order\OrderFacade as Order;
 use App\Models\Order as OrderModel;
 use App\Models\Package;
-
-
-
-use App\Repository\Page\PageFacade as Page;
 use Illuminate\Support\Facades\Auth;
 
 class OrdersController extends Controller
@@ -23,11 +19,8 @@ class OrdersController extends Controller
     */
     public function index(Request $request)
     {
-        $data = Page::find(1)->content;
-
         $orders= Order::index(['*'],['details.package.service','promo'],[],0,['user_id'=>$request->user()->id,'is_active'=>true]);
-        // dd($orders->toArray());
-        return view('orders',compact('orders','data'));
+        return view('orders',compact('orders'));
     }
     /**
     * Display a listing of the resource.
@@ -39,18 +32,15 @@ class OrdersController extends Controller
         return ($status) ? redirect()->route('checkout') : back();
     }
     
-    public function checkout()
+    public function checkout(Request $request)
     {
-        $page=Page::find(5,['*'],[],['content']);//Get About_us Page Data
-        $data = Page::find(1)->content;
         $cart=Order::find(Order::getCart()->id,['*'],['details.package.service','details.package.terms']);
-        // dd($cart->toArray());
-        return view('checkout',compact('cart','page','data'));
+        $intent=$request->user()->createSetupIntent();
+        //////////////////////////////Test
+        $payment_methods = Auth::user()->paymentMethods();
+        //////////////////////////////
+        return view('checkout',compact('cart','payment_methods','intent'));
     }
-   
-
-    
-    
     /**
     * Store a newly created resource in storage.
     * @param Request $request
@@ -60,12 +50,8 @@ class OrdersController extends Controller
     {
         $request->validate([
             'promo'=>'nullable|exists:promos,code',
-            'paymentCard.num'=>'required|digits:16',
-            'paymentCard.code'=>'required|numeric',
-            'paymentCard.month'  =>'required|digits_between:1,12',
-            'paymentCard.year'  =>'required|numeric|min:21',
         ]);
-
+        $request->user()->addPaymentMethod($request->payment_method);
         $success= Order::create($request);
         return response()->json(['success' => $success], 200);
     }
@@ -80,7 +66,7 @@ class OrdersController extends Controller
         if (!$order->is_active||$order->user_id!=Auth::user()->id) {
             abort(404);
         }
-        return view("post_create_order");
+        dd($order->toArray());
     }
     
     /**

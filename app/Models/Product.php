@@ -9,8 +9,9 @@ class Product extends Model
     protected $guarded = [];
     protected $dates = ['expired_at'];
     // //////////////////////////////////////////////Attributes
-    // public function getContentAttribute(){}
-    
+    public function getPaymentAttribute(){
+        return User::find($this->user_id)->findPaymentMethod($this->payment_id);
+    }
     // //////////////////////////////////////////////relationships
     public function user()
     {

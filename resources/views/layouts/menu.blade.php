@@ -2,25 +2,25 @@
     
     {{-- Home --}}
     @if (Route::currentRouteName()=='home')
-    <li><a href="javascript:;" class="nav-link text-primary ar-font">{{$data[5]}}</a></li>
+    <li><a href="javascript:;" class="nav-link text-primary ar-font">@lang('web.home')</a></li>
     @else
-    <li><a href="{{ LaravelLocalization::localizeUrl('/') }}" class="nav-link ar-font">{{$data[5]}}</a></li>
+    <li><a href="{{ LaravelLocalization::localizeUrl('/') }}" class="nav-link ar-font">@lang('web.home')</a></li>
     @endif
     {{-- services --}}
     @if (Route::currentRouteName()=='services')
-    <li><a href="javascript:;" class="nav-link text-primary ar-font">{{$data[6]}}</a></li>
+    <li><a href="javascript:;" class="nav-link text-primary ar-font">@lang('web.services')</a></li>
     @else
-    <li><a href="{{ LaravelLocalization::localizeUrl('/services') }}" class="nav-link ar-font">{{$data[6]}}</a></li>
+    <li><a href="{{ LaravelLocalization::localizeUrl('/services') }}" class="nav-link ar-font">@lang('web.services')</a></li>
     @endif
     {{-- About Us --}}
     @if (Route::currentRouteName()=='about_us')
-    <li><a href="javascript:;" class="nav-link text-primary ar-font">{{$data[26]}}</a></li>
+    <li><a href="javascript:;" class="nav-link text-primary ar-font">@lang('web.about_us')</a></li>
     @else
-    <li><a href="{{ LaravelLocalization::localizeUrl('/about_us') }}" class="nav-link ar-font">{{$data[26]}}</a></li>
+    <li><a href="{{ LaravelLocalization::localizeUrl('/about_us') }}" class="nav-link ar-font">@lang('web.about_us')</a></li>
     @endif
     
     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle ar-font" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{$data[8]}}</a>
+        <a class="nav-link dropdown-toggle ar-font" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">@lang('web.languages')</a>
         <div class="dropdown-menu border-0 rounded-custom shadow py-0 bg-white">
             <div class="dropdown-grid rounded-custom">
                 <div class="dropdown-grid-item">
@@ -45,7 +45,7 @@
                 <div class="dropdown-grid-item" style="white-space: nowrap;">
                     <a rel="alternate" href="{{ LaravelLocalization::localizeUrl('/profile') }}" class="dropdown-link">
                         <span class="me-2"><i class="fa-regular fa-address-book"></i></span>
-                        <div class="drop-title ar-font">{{$data[38]}}</div>
+                        <div class="drop-title ar-font">@lang('web.your_profile')</div>
                     </a>
                     <a rel="alternate" href="{{ LaravelLocalization::localizeUrl('/checkout') }}" class="dropdown-link">
                         <span class="me-2"><i class="fa-solid fa-cart-shopping"></i></span>
@@ -53,7 +53,7 @@
                     </a>
                     <a rel="alternate" href="javascrept:;" class="dropdown-link" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <span class="me-2"><i class="fa-solid fa-door-open"></i></span>
-                        <div class="drop-title ar-font">{{$data[37]}}</div>
+                        <div class="drop-title ar-font">@lang('web.logout')</div>
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
