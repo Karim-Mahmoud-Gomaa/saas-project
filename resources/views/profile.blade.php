@@ -45,6 +45,17 @@
         </div>
         <div class="position-relative w-100">
             <div class="row">
+            <div class="col-lg-4 col-md-6 p-2">
+                    <a href="{{ LaravelLocalization::localizeUrl('/orders') }}" class="position-relative text-decoration-none connected-app-single bg-white border border-2 bg-white mt-0 mt-lg-0 mt-md-0 transition-base rounded-custom d-block overflow-hidden p-5">
+                        <div class="position-relative connected-app-content">
+                            <div class="p-2"><i class="fa-solid fa-receipt fa-3x"></i></div>
+                            <h5>@lang('web.order_history')</h5>
+                            <p class="mb-0 text-muted shift-text">
+                                {{__('web.you_have',['num'=>$orders,'name'=>($orders>1)?__('web.orders'):__('web.order')])}}
+                            </p>
+                        </div>
+                    </a>
+                </div>
                 <div class="col-lg-4 col-md-6 p-2">
                     <a href="javascript:;" class="position-relative text-decoration-none connected-app-single bg-white border border-2 bg-white mt-0 mt-lg-0 mt-md-0 transition-base rounded-custom d-block overflow-hidden p-5">
                         <div class="position-relative connected-app-content">
@@ -76,18 +87,6 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-lg-4 col-md-6 p-2">
-                    <a href="{{ LaravelLocalization::localizeUrl('/orders') }}" class="position-relative text-decoration-none connected-app-single bg-white border border-2 bg-white mt-0 mt-lg-0 mt-md-0 transition-base rounded-custom d-block overflow-hidden p-5">
-                        <div class="position-relative connected-app-content">
-                            <div class="p-2"><i class="fa-solid fa-receipt fa-3x"></i></div>
-                            <h5>@lang('web.order_history')</h5>
-                            <p class="mb-0 text-muted shift-text">
-                                {{__('web.you_have',['num'=>$orders,'name'=>($orders>1)?__('web.orders'):__('web.order')])}}
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                
             </div>
         </div>
     </div>

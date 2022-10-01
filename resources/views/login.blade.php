@@ -31,17 +31,22 @@ $lang=LaravelLocalization::getCurrentLocale();
                     <form action="{{asset('login')}}" method="POST" class="mt-4 register-form">
                         @csrf
                         <div class="row">
+                             @if($errors->any())
+                                <div class="alert alert-danger text-center">
+                                    <p style="color:#d93846;font-size: 0.9em;">@lang($errors->first())</p>
+                                </div>
+                            @endif
                             <div class="col-sm-12">
-                                <label for="email" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">{{__('web.email')}} <span class="text-danger">*</span></label>
+                                <label for="email" class="mb-1 ar-font rtl}}">{{__('web.email')}} <span class="text-danger">*</span></label>
                                 <div class="input-group mb-3">
-                                    <input type="email" class="form-control" placeholder="{{__('web.email')}}" name="email" value="user@test.com" required aria-label="email">
+                                    <input type="email" class="form-control" placeholder="{{__('web.email')}}" name="email" value="" required aria-label="email">
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <label for="password" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">{{__('web.password')}} <span
+                                <label for="password" class="mb-1 ar-font rtl">{{__('web.password')}} <span
                                     class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="password" class="form-control" placeholder="{{__('web.password')}}" name="password" value="password" required aria-label="Password">
+                                        <input type="password" class="form-control" placeholder="{{__('web.password')}}" name="password" value="" required aria-label="Password">
                                     </div>
                                 </div>
                                 <div class="col-12">

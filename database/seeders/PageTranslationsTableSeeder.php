@@ -47,7 +47,7 @@ class PageTranslationsTableSeeder extends Seeder
             array (
                 'id' => 15,
                 'page_id' => 3,
-                'content' => '{"en":"Frequently Asked Questions"}',
+                'content' => '{"en":"Frequently Asked Questions","ar":"الاسئلة الشائعه"}',
             ),
             5 => 
             array (
@@ -59,13 +59,13 @@ class PageTranslationsTableSeeder extends Seeder
             array (
                 'id' => 27,
                 'page_id' => 6,
-                'content' => '{"en":"Nice to Seeing You Again"}',
+                'content' => '{"en":"Nice to Seeing You Again","ar":"اهلا بك من جديد"}',
             ),
             7 => 
             array (
                 'id' => 28,
                 'page_id' => 6,
-                'content' => '{"en":"Please log in to access your account web-enabled methods of innovative niches."}',
+                'content' => '{"en":"Please log in to access your account web-enabled methods of innovative niches.","ar":"يرجى تسجيل الدخول للوصول إلى حسابك على الإنترنت بأساليب منافذ مبتكرة."}',
             ),
         ));
         

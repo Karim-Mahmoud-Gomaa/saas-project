@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         // $this->call(PagePagesTableSeeder::class);
-        $this->call(PageTranslationsTableSeeder::class);
         $this->call(PagesTableSeeder::class);
+        $this->call(PageTranslationsTableSeeder::class);
         $this->call(TermsTableSeeder::class);
         $this->call(TermPackagesTableSeeder::class);
         $this->call(ServicesTableSeeder::class);

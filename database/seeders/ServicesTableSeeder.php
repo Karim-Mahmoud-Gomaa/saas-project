@@ -21,11 +21,11 @@ class ServicesTableSeeder extends Seeder
         \DB::table('services')->insert(array (
             0 => 
             array (
-                'id' => 6,
-                'slug' => 'service-one',
-                'name' => '{"en":"Service One"}',
+                'id' => 1,
+                'slug' => 'cart-monster',
+                'name' => '{"en":"Cart Monster","ar":"Monster متجر"}',
                 'keywords' => NULL,
-                'description' => '{"en":"Synergistically pursue accurate initiatives without economically sound imperatives.\\n\\nProfessionally architect unique process improvements via optimal."}',
+                'description' => '{"en":"E-commerce Platform which supports all you need.","ar":"منصة التجارة الإلكترونية التي تدعم كل ما تحتاجه."}',
             ),
         ));
         

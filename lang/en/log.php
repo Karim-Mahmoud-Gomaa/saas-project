@@ -15,7 +15,7 @@ return [
     'or'=>'Or',
     
     'login'=>[
-        'page_title'=>'LogIn',
+        'page_title'=>'Login',
         'title'=>'Nice to Seeing You Again',
         'body'=>'Please log in to access your account web-enabled methods of innovative niches.',
     ],

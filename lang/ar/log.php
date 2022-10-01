@@ -4,6 +4,7 @@ return [
     'name'=>'الأسم',
     'email'=>'البريد الألكتروني',
     'password'=>'كلمة المرور',
+    'password_confirmation'=>'تأكيد كلمة المرور',
     'company'=>'اسم الشركة',
     'no_account'=>'لا أملك حساب ؟',
     'have_account'=>'هل لديك حساب ؟',

@@ -22,7 +22,7 @@ class AuthController extends Controller
         if ($auth) {
             return redirect('/');
         }
-        return back()->withErrors(['phone' => 'You have entered an invalid phone or password']);
+        return back()->withErrors(['error' => 'auth.failed']);
     }
     
     public function register(Request $request)
@@ -32,11 +32,11 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'company'=> 'nullable|string|max:100',
             'password'=> 'required|confirmed|string|min:8',
-            // 'terms'=> 'required',
         ]);
         $auth=User::create($request);
         if ($auth) {
-            return redirect('login');
+            Auth::attempt(['email' => $request->email,'password' => $request->password]);
+            return redirect('/');
         }
         return back()->withErrors(['phone' => 'You have entered an invalid Data']);
     }    

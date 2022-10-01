@@ -51,6 +51,7 @@ class OrdersController extends Controller
         $request->validate([
             'promo'=>'nullable|exists:promos,code',
         ]);
+        $request->user()->createOrGetStripeCustomer([]);
         $request->user()->addPaymentMethod($request->payment_method);
         $success= Order::create($request);
         return response()->json(['success' => $success], 200);
@@ -66,7 +67,8 @@ class OrdersController extends Controller
         if (!$order->is_active||$order->user_id!=Auth::user()->id) {
             abort(404);
         }
-        dd($order->toArray());
+        $orders= Order::index(["*"],['details.package.service','promo'],[],0,['id'=>$order->id,'user_id'=>Auth::user()->id,'is_active'=>true]);
+        return view('orders',compact('orders'));
     }
     
     /**

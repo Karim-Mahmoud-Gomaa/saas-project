@@ -6,6 +6,15 @@
 <title>{{$page->name}}</title>
 @endsection
 
+@section("css")
+<style>
+.subscribed{
+    font-weight: bold;
+    color: #1778ff !important;
+    margin-top: 1em;
+}
+</style>
+@endsection
 
 @section('content')
 <!--page header section start-->
@@ -37,9 +46,37 @@
                             <h3 class="h5">{{$service->name}}</h3>
                             <p class="mb-0">{!!nl2br($service->description)!!}</p>
                         </div>
-                        <a href="{{ LaravelLocalization::localizeUrl('/services/'.$service->slug) }}" class="link-with-icon text-decoration-none mt-3">View Details <i
-                            class="far fa-arrow-right"></i>
-                        </a>
+
+                        @php
+                            $subscribed=false;
+                            $order_id=-1;
+                            if(\Auth::user()){
+                                $orders = \Auth::user()->orders()->get();
+                                for($index=0;$index<count($orders);$index++){
+                                    if($orders[$index]->details[0]->package->service->id==$service->id){
+                                        $subscribed=true;
+                                        $order_id=$orders[$index]->id;
+                                    }
+                                }
+                            }
+                        @endphp
+
+                        @if($subscribed)
+                            <a href="{{ LaravelLocalization::localizeUrl('/orders/'.$order_id) }}" class="link-with-icon text-decoration-none mt-3">
+                                @lang('web.view_details')
+                                <i class="far fa-arrow-right"></i>
+                            </a>
+                        @else
+                            <a href="{{ LaravelLocalization::localizeUrl('/services/'.$service->slug) }}" class="link-with-icon text-decoration-none mt-3">
+                                @lang('web.view_details')
+                                <i class="far fa-arrow-right"></i>
+                            </a>
+                        @endif
+                        
+                        @if($subscribed)
+                        <hr>
+                        <p class="subscribed text-center">@lang('web.already_subscribed')</p>
+                        @endif
                     </div>
                     @endforeach
                 </div>

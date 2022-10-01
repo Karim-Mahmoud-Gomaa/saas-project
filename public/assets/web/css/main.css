@@ -3028,7 +3028,7 @@ textarea.form-control-lg {
 
 /* line 2047, src/assets/scss/vendors/bootstrap.min.css */
 .form-check .form-check-input {
-  float: left;
+  /* float: left; */
   margin-left: -1.5em;
 }
 
@@ -6467,7 +6467,7 @@ fieldset:disabled .btn {
 /* line 4375, src/assets/scss/vendors/bootstrap.min.css */
 .alert {
   position: relative;
-  padding: 1rem 1rem;
+  padding: 0.5rem 0.5rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
@@ -8725,9 +8725,8 @@ fieldset:disabled .btn {
 
 /* line 5967, src/assets/scss/vendors/bootstrap.min.css */
 .float-end {
-  float: right !important;
+  float: right;
 }
-
 /* line 5970, src/assets/scss/vendors/bootstrap.min.css */
 .float-none {
   float: none !important;
@@ -50248,6 +50247,8 @@ select:invalid {
 /* line 992, src/assets/scss/custom/_style.scss */
 .form-check-label {
   font-size: 13px;
+  margin-right: 2em;
+  margin-left: .5em;
 }
 
 /* line 995, src/assets/scss/custom/_style.scss */
@@ -55884,6 +55885,10 @@ i {
   color: var(--bs-light-gray);
   line-height: normal;
   font-size: 16px;
+}
+
+.flex{
+  display: flex
 }
 
 /*# sourceMappingURL=../../../scss */

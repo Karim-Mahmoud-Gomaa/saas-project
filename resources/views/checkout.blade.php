@@ -17,6 +17,11 @@
         border: #e24e5d solid 1px !important;
         color: #e24e5d !important;
     }
+    .new-method{
+        display: flex;
+        gap: 10px;
+        margin: 1em;
+    }
 </style>
 @endsection
 
@@ -93,7 +98,7 @@
                             <h2>@lang('web.order_summary')</h2>
                         </div>
                     </div>
-                    <div v-if="page==1" class="card rounded-custom mb-5 summary">
+                    <div v-show="page==1" class="card rounded-custom mb-5 summary">
                         <div class="card-body pt-5"  v-for="(detail,index) in cart.details">
                             <p class="h6"><i class="fa-regular fa-circle-dot"></i> {% detail.package.service.name[lang] %} ({% detail.package.name[lang] %})</p>
                             <p class="h6 ms-3 prices">
@@ -139,7 +144,7 @@
                             <button type="button" @click="changePage(2)" class="btn btn-primary">Submit Order <i class="fa-solid fa-right-long"></i> </button>
                         </div>
                     </div>
-                    <div v-else-if="page==2" class="card rounded-custom mb-5 summary">
+                    <div v-show="page==2" class="card rounded-custom mb-5 summary">
                         <div class="card-body pt-4">
                             <p class="h5">Total <span class="float-end">{% moneyFormat(getTotalPrice()) %}</span></p>
                         </div>
@@ -158,7 +163,9 @@
                                         </label>
                                     </div>
                                     @endforeach
-                                    <div class="form-check">
+                                @else
+                                <div class="row">
+                                    <div class="form-check new-method">
                                         <input class="form-check-input" type="radio" v-model="payment_method" name="payment_method" value="" id="flexRadioDefault0" >
                                         <label class="form-check-label" for="flexRadioDefault0">
                                             New Payment Method
@@ -175,27 +182,9 @@
                                     </div>
                                     
                                     <div class="form-group">
-                                        <label for="card-number">Credit Card Number</label>
-                                        <span id="card-number" class="form-control stripe-element-container">
-                                            <!-- Stripe Card Element -->
-                                        </span>
+                                        <label for="card-element">Credit Card</label>
+                                        <div id="card-element" class="form-control"></div>
                                     </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="card-cvc">CVC Number</label>
-                                        <span id="card-cvc" class="form-control stripe-element-container">
-                                            <!-- Stripe CVC Element -->
-                                        </span>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="card-exp">Expiration</label>
-                                        <span id="card-exp" class="form-control stripe-element-container">
-                                            <!-- Stripe Card Expiry Element -->
-                                        </span>
-                                    </div>
-                                    
-                                    {{-- <button @click.prevent="paymentSubmit" class="btn btn-primary mt-1 float-right">Submit Payment</button> --}}
                                     
                                 </form>
                             </div>
@@ -209,8 +198,7 @@
                                 </template>
                             </template>    
                             <a href="javascript:;" @click="changePage(1)" class="btn btn-info"><i class="fa-solid fa-left-long"></i> Back</a>
-                            <button type="submit" @click="saveOrder()" class="btn btn-success float-end">Pay Now <i class="fa-solid fa-money-check"></i></button>
-                        </div>
+                            <button id="pay-now" type="submit" @click="saveOrder()" class="btn btn-success float-end disabled">Pay Now <i class="fa-solid fa-money-check"></i></button>                        </div>
                     </div>
                 </div>
             </div>
@@ -219,7 +207,7 @@
         <div class="row">
             <div class="col-12 text-center">
                 <h2>@lang('web.empty_cart')</h2>
-                <a href="{{ LaravelLocalization::localizeUrl('/services') }}" class="btn btn-info">Go Shopping Now <i class="fa-solid fa-cart-arrow-down"></i></a>
+                <a href="{{ LaravelLocalization::localizeUrl('/services') }}" class="btn btn-info">@lang("web.go_shopping") <i class="fa-solid fa-cart-arrow-down"></i></a>
             </div>
         </div>
         @endif
@@ -234,10 +222,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
     <script>
         let stripe;
+        let elements;
         const { createApp } = Vue
         createApp({
             delimiters: ['{%', '%}'],
-            data() {
+            data: function ()  {
                 return {
                     cart: {!! json_encode($cart->toArray()) !!},
                     lang: "{{ LaravelLocalization::getCurrentLocale() }}",
@@ -253,72 +242,39 @@
                     cardElement:null,
                     page:1,
                     errors:null,
+                    ccName:"",
                 }
             },
             mounted: function() {
-                const style = {
-                    base: {
-                        'fontSize': '16px',
-                        'color': '#495057',
-                        'fontFamily': 'apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif'
-                    }
-                };
-                stripe = Stripe('pk_test_51LeyNHENbOgVwcDpmU9fhiz2MNRaCf3mKkgCvgvliDHnIWxDBbdhEkfipG8zP4Th6orsRubHmAUsFFj0Hze6HOLi00c8kxMR7j');
-                const elements = stripe.elements();
-                // Card number
-                this.card = elements.create('cardNumber', {
-                    'placeholder': 'cardNumber',
-                    'style': style
-                });
-                this.card.mount('#card-number');
                 
-                // CVC
-                this.cvc = elements.create('cardCvc', {
-                    'placeholder': 'CVC',
-                    'style': style
-                });
-                this.cvc.mount('#card-cvc');
-                
-                // Card expiry
-                this.exp = elements.create('cardExpiry', {
-                    'placeholder': 'MM/YY',
-                    'style': style
-                });
-                this.exp.mount('#card-exp');
-                
-                
-                // this.drowCardElements()
             },
             methods: {
                 drowCardElements(){
+                    const style = {
+                        base: {
+                            'fontSize': '16px',
+                            'color': '#495057',
+                            'fontFamily': 'apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif'
+                        }
+                    };
                     stripe = Stripe('pk_test_51LeyNHENbOgVwcDpmU9fhiz2MNRaCf3mKkgCvgvliDHnIWxDBbdhEkfipG8zP4Th6orsRubHmAUsFFj0Hze6HOLi00c8kxMR7j');
-                    const elements = stripe.elements({
-                        fonts: [
-                        {
-                            cssSrc: "https://rsms.me/inter/inter.css"
-                        }
-                        ],
-                        locale: window.__exampleLocale
+                    elements = stripe.elements();
+
+                    // Card number
+                    this.card = elements.create('card', {
+                        'style': style
                     });
-                    this.cardElement = elements.create("card", {
-                        style: {
-                            base: {
-                                color: "#32325D",
-                                fontWeight: 500,
-                                fontFamily: "Inter, Open Sans, Segoe UI, sans-serif",
-                                fontSize: "16px",
-                                fontSmoothing: "antialiased",
-                                
-                                "::placeholder": {
-                                    color: "#CFD7DF"
-                                }
-                            },
-                            invalid: {
-                                color: "#E25950"
-                            }
-                        }
+                    this.card.mount('#card-element');
+                    this.card.on('change', function(event) {
+                        if(event.complete){
+                            document.getElementById("pay-now").classList.remove("disabled");
+                        }else{
+                            document.getElementById("pay-now").classList.add("disabled");
+                        } 
                     });
-                    this.cardElement.mount('#card-element');
+                    if(this.payment_method){
+                        document.getElementById("pay-now").classList.remove("disabled");
+                    }
                 },
                 changed(event,detail){
                     let id=event.target.value;
@@ -411,7 +367,9 @@
                 },
                 changePage(num) {
                     this.page=num;
-                    // this.drowCardElements()
+                    if(num==2){
+                        this.drowCardElements();
+                    }
                 },
                 isNumber(event) {
                     event = (event) ? event : window.event;
@@ -422,29 +380,81 @@
                         return true;
                     }
                 },
-                async saveOrder() {
-                    let payment_method=this.payment_method;
-                    if (payment_method.length==0&&this.ccName.length) {
-                        let that=this
-                        const { setupIntent, error } = await stripe.confirmCardSetup(
-                        "{{ $intent->client_secret }}", {
-                            payment_method: {
-                                card: that.card,
-                                billing_details: { name: that.ccName }
-                            }
-                        }
-                        );
-                        
-                        if (error) {
-                            console.log(error.message);
-                        } else {
-                            payment_method=setupIntent.payment_method
-                        }
+                async createStripIntent(){
+                    var orderData = {
+                        "amount": 1099,
+                        "currency": "usd",
+                        "payment_method_types[]" : "card"
                     }
+
+                    var formBody = [];
+                    for (var property in orderData) {
+                        var encodedKey = encodeURIComponent(property);
+                        var encodedValue = encodeURIComponent(orderData[property]);
+                        formBody.push(encodedKey + "=" + encodedValue);
+                    }
+                    formBody = formBody.join("&");
+                    let response = await fetch("https://api.stripe.com/v1/payment_intents", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                            'Authorization': 'Bearer sk_test_51LeyNHENbOgVwcDpyOoWBePZJl4mpBS6ysgBauAyl67koBd5MsQSNjcRUkeewFP5g9CNeX6e9q6gDcUhvcwvB4gJ00YB4wKDSd'
+                        },
+                        body: formBody
+                    });
+                    return (await response.json()).client_secret;
+                },
+                async saveOrder() {
+                    
+
+                    if(!this.payment_method){
+                        const intentClientSecret = await this.createStripIntent();
+                        console.log(intentClientSecret);
+
+                        const payment_method = {
+                            card: this.card,
+                            billing_details: {
+                                name: 'Jenny Rosen',
+                            },
+                        };
+
+                        stripe.confirmCardPayment(intentClientSecret, {
+                            payment_method
+                        })
+                        .then(function(result) {
+                            // Handle result.error or result.paymentIntent
+                        });
+
+                        const paymentMethodData = await stripe.createPaymentMethod(
+                            'card', this.card, {
+                                billing_details: { name: "Jenny Rosen" }
+                            }
+                        ); 
+
+                        console.log("paymentMethodResult",paymentMethodData);
+                    }
+
+                    // if (payment_method.length==0&&this.ccName.length) {
+                    //     let that=this
+                    //     const { setupIntent, error } = await stripe.confirmCardSetup(
+                    //     "{{ $intent->client_secret }}", {
+                    //         payment_method: {
+                    //             card: that.card,
+                    //             billing_details: { name: this.ccName }
+                    //         }
+                    //     }
+                    //     );
+                        
+                    //     if (error) {
+                    //         console.log(error.message);
+                    //     } else {
+                    //         payment_method=setupIntent.payment_method
+                    //     }
+                    // }
                     
                     let route="{{ LaravelLocalization::localizeUrl('/orders') }}";
                     let data={
-                        payment_method:payment_method,
+                        payment_method : this.payment_method?this.payment_method:paymentMethodData.paymentMethod.id,
                         cart:this.cart,
                         promo:this.promo.value?this.promo.code:null
                     }

@@ -8,7 +8,7 @@ return [
     'pricing'=>'Pricing',
     'get_started'=>'Get Started',
     
-    
+    'title' => 'Services'
 
 
 

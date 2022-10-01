@@ -4,7 +4,52 @@
 @section('footer') <span></span> @endsection
 @section('title') @lang('log.signup.page_title') @endsection
 
+@section('css')
+
+<style>
+
+    .password-meter-wrap {
+        margin-top: 5px;
+        height: 16px;
+        background-color: #ddd;
+        height: 0.3em;
+        width: 100%;
+    }
+
+    .password-meter-bar {
+        width: 0;
+        height: 100%;
+        transition: width 400ms ease-in;
+    }
+
+    .password-meter-bar.level0 {
+        width: 20%;
+        background-color: #d00;
+    }
+    .password-meter-bar.level1 {
+        width: 40%;
+        background-color: #f50;
+    }
+    .password-meter-bar.level2 {
+        width: 60%;
+        background-color: #ff0;
+    }
+    .password-meter-bar.level3 {
+        width: 80%;
+        background-color: rgb(161, 168, 65);
+    }
+
+    .password-meter-bar.level4 {
+        width: 100%;
+        background-color: #393;
+    }
+
+</style>
+
+@endsection
+
 @section('content')
+<script src="https://gabrieleromanato.dev/demo/javascript-password-meter-zxcbn/js/zxcvbn.js"></script>
 @php
 $lang=LaravelLocalization::getCurrentLocale();
 @endphp
@@ -30,11 +75,7 @@ $lang=LaravelLocalization::getCurrentLocale();
                                             </ul>
                                         </div>
                                         <blockquote>
-                                            <h5>The Best Template You Got to Have it!</h5>
-                                            Globally network long-term high-impact schemas vis-a-vis distinctive
-                                            e-commerce
-                                            cross-media infrastructures rather than ethical sticky alignments rather
-                                            than global.
+                                            <h5>@lang("web.review1")</h5>
                                         </blockquote>
                                         <div class="author-info mt-4">
                                             <h6 class="mb-0">Joe Richard</h6>
@@ -54,10 +95,7 @@ $lang=LaravelLocalization::getCurrentLocale();
                                             </ul>
                                         </div>
                                         <blockquote>
-                                            <h5>Amazing Quiety template!</h5>
-                                            Distinctively engineer client-centered information and cooperative core
-                                            competencies. Progressively customize client-centered repurpose viral
-                                            e-services whereas before 24/7 total linkage.
+                                            <h5>@lang("web.review2")</h5>
                                         </blockquote>
                                         <div class="author-info mt-4">
                                             <h6 class="mb-0">Oberoi R.</h6>
@@ -77,10 +115,7 @@ $lang=LaravelLocalization::getCurrentLocale();
                                             </ul>
                                         </div>
                                         <blockquote>
-                                            <h5>Embarrassed by the First Version!</h5>
-                                            Efficiently whiteboard cross-unit meta-services after bleeding-edge
-                                            deliverables. Quickly transition standardized schemas via leveraged
-                                            users. Assertively actualize mission-critical supply chains through .
+                                            <h5>@lang("web.review3")</h5>
                                         </blockquote>
                                         <div class="author-info mt-4">
                                             <h6 class="mb-0">Joan Dho</h6>
@@ -110,7 +145,7 @@ $lang=LaravelLocalization::getCurrentLocale();
                         </div>
                         <div class="row justify-content-center mt-60">
                             <div class="col-12">
-                                <p>Already trusted by some of the greatest companies</p>
+                                <p>@lang("web.trusted_many_companies")</p>
                                 <ul class="list-unstyled list-inline mb-0">
                                     <li class="list-inline-item">
                                         <img src="{{asset('')}}assets/web/img/clients/client-logo-1.svg" width="120" alt="clients logo" class="img-fluid py-3 me-3 customer-logo">
@@ -151,33 +186,36 @@ $lang=LaravelLocalization::getCurrentLocale();
                             @csrf
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="name" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">@lang('log.name') <span class="text-danger">*</span></label>
+                                    <label for="name" class="mb-1 ar-font rtl }}">@lang('log.name') <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="{{__('log.name')}}" id="name" required aria-label="name">
                                     </div>
                                 </div>
                                 <div class="col-sm-6 ">
-                                    <label for="email" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">@lang('log.email') <span class="text-danger">*</span></label>
+                                    <label for="email" class="mb-1 ar-font rtl}}">@lang('log.email') <span class="text-danger">*</span></label>
                                     <div class="input-group mb-3">
                                         <input type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="{{__('log.email')}}" id="email" required aria-label="email">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <label for="company" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">@lang('log.company')</label>
+                                    <label for="company" class="mb-1 ar-font rtl}}">@lang('log.company')</label>
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control {{ $errors->has('company') ? ' is-invalid' : '' }}" name="company" value="{{ old('company') }}" placeholder="{{__('log.company')}}" id="company" required aria-label="company">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <label for="password" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">@lang('log.password') <span
+                                    <label for="password" class="mb-1 ar-font rtl}}">@lang('log.password') <span
                                         class="text-danger">*</span>
                                     </label>
                                     <div class="input-group mb-3">
-                                        <input type="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{__('log.password')}}" id="password" required aria-label="Password">
+                                        <input type="password"  onkeyup="score_password(this.value)" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" placeholder="{{__('log.password')}}" id="password" required aria-label="Password">
+                                        <div class="password-meter-wrap">
+                                            <div class="password-meter-bar"></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
-                                    <label for="password" class="mb-1 ar-font rtl float-{{($lang=='ar')?'end':'start'}}">@lang('log.password_confirmation') <span
+                                    <label for="password" class="mb-1 ar-font rtl}}">@lang('log.password_confirmation') <span
                                         class="text-danger">*</span>
                                     </label>
                                     <div class="input-group mb-3">
@@ -185,7 +223,7 @@ $lang=LaravelLocalization::getCurrentLocale();
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-check d-flex">
+                                    <div class="form-check flex">
                                         <input class="form-check-input me-2" type="checkbox" name="terms" required id="flexCheckChecked">
                                         <label class="form-check-label ar-font rtl" for="flexCheckChecked">
                                             @lang('log.i_read')
@@ -219,4 +257,14 @@ $lang=LaravelLocalization::getCurrentLocale();
     </div>
 </section>
 <!--register section end-->
+
+<script>
+    function score_password(password){
+        let bar = document.getElementsByClassName('password-meter-bar')[0];
+        bar.classList.remove('level0', 'level1', 'level2', 'level3', 'level4');
+        let cls = `level${zxcvbn(password).score}`;
+        bar.classList.add(cls);
+    }
+    
+</script>
 @endsection

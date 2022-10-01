@@ -9,7 +9,7 @@
 <section class="page-header position-relative overflow-hidden ptb-120 bg-dark" style="background: url('{{asset('')}}assets/web/img/page-header-bg.svg')no-repeat bottom left">
     <div class="container">
         <div class="row align-items-center justify-content-between">
-            <div class="col-lg-8 col-md-12">
+            <div class="col-lg-12 col-md-12">
                 <h1 class="display-5 fw-bold">@lang('web.your_orders')</h1>
             </div>
         </div>

@@ -16,6 +16,7 @@ class WebCompanyController extends Controller
    
     //pages
     public function home(Request $request){
+        if (Auth::user()) {return redirect('/profile');}
         $page=Page::find(2,['*'],[],['content']);//Get Home Page Data
         return view('home',compact('page'));
     }

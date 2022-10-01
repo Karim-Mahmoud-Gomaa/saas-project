@@ -79,8 +79,6 @@
             <div class="col-lg-7 col-12">
                 <div class="section-heading text-center">
                     <h4 class="h5 text-primary">@lang('web.faq')</h4>
-                    <h2>{{$page->content[15]}}</h2>
-                    <p>{{$page->content[16]}}</p>
                 </div>
             </div>
         </div>

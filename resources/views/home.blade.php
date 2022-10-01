@@ -6,6 +6,19 @@
 <title>{{$page->title}}</title>
 @endsection
 
+@section('css')
+    @php
+        $lang=LaravelLocalization::getCurrentLocale();
+    @endphp
+    @if ($lang=='ar')
+        <style>
+            .right-0{
+                right: 60% !important; 
+            }
+        </style>
+    @endif
+@endsection
+
 
 @section('content')
 <!--hero section start-->
@@ -17,12 +30,12 @@
                     <h1 class="fw-bold display-5 lh2 ar-font rtl">{{$page->content[3]}}</h1>
                     <p class="lead ar-font rtl">{{$page->content[4]}}</p>
                     <div class="action-btn mt-5 align-items-center d-block d-sm-flex d-lg-flex d-md-flex">
-                        <a href="request-demo.html" class="btn btn-primary me-3">Request For Demo</a>
+                        <a href="request-demo.html" class="btn btn-primary me-3">@lang('web.request_for_demo')</a>
                         <a href="http://www.youtube.com/watch?v=hAP2QF--2Dg" class="text-decoration-none popup-youtube d-inline-flex align-items-center watch-now-btn mt-3 mt-lg-0 mt-md-0"> <i
-                            class="fas fa-play"></i> Watch Demo </a>
+                            class="fas fa-play"></i> @lang('web.watch_demo') </a>
                         </div>
                         <div class="row justify-content-lg-start mt-60">
-                            <h6 class="text-white-70 mb-2">Our Top Clients:</h6>
+                            <h6 class="text-white-70 mb-2">@lang('web.our_top_clients'):</h6>
                             <div class="col-4 col-sm-3 my-2 ps-lg-0">
                                 <img src="{{asset('')}}assets/web/img/clients/client-1.svg" alt="client" class="img-fluid">
                             </div>
@@ -73,8 +86,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-10">
                     <div class="section-heading text-center">
-                        <h2>With all the Features You Need</h2>
-                        <p>Credibly grow premier ideas rather than bricks-and-clicks strategic theme areas distributed for stand-alone web-readiness.</p>
+                        <h2>@lang('web.all_features')</h2>
                     </div>
                 </div>
             </div>
@@ -85,8 +97,7 @@
                             <i class="fal fa-layer-group fa-2x text-white"></i>
                         </div>
                         <div class="feature-info-wrap">
-                            <h3 class="h5">Good Performance</h3>
-                            <p>Appropriately grow competitive leadership rather than strategic technically sound processes without state. </p>
+                            <h3 class="h5">@lang('web.good_performance')</h3>
                         </div>
                     </div>
                 </div>
@@ -96,8 +107,7 @@
                             <i class="fal fa-shield-check fa-2x text-white"></i>
                         </div>
                         <div class="feature-info-wrap">
-                            <h3 class="h5">Highly Secure</h3>
-                            <p>Appropriately grow competitive leadership rather than strategic technically sound processes without state. </p>
+                            <h3 class="h5">@lang('web.highly_secure')</h3>
                         </div>
                     </div>
                 </div>
@@ -107,8 +117,7 @@
                             <i class="fal fa-code fa-2x text-white"></i>
                         </div>
                         <div class="feature-info-wrap">
-                            <h3 class="h5">Fast Development</h3>
-                            <p>Appropriately grow competitive leadership rather than strategic technically sound processes without state. </p>
+                            <h3 class="h5">@lang('web.fast_development')</h3>
                         </div>
                     </div>
                 </div>
@@ -117,11 +126,11 @@
                 <div class="col-lg-6 mt-4">
                     <div class="position-relative d-flex flex-column h-100 flex-wrap bg-danger-soft p-5 rounded-custom">
                         <div class="cta-left-info mb-2">
-                            <h5>Utilize your software data</h5>
-                            <p>Progressively reinvent models and niche revolutionary benefits for integrated niches. </p>
+                            <h5>@lang("web.create_your_store")</h5>
+                            <p>@lang("web.create_your_store_txt")</p>
                         </div>
                         <div class="mt-auto">
-                            <a href="request-demo.html" class="btn btn-outline-primary btn-sm">Start For Free</a>
+                            <a href="/register" class="btn btn-outline-primary btn-sm">@lang("web.start_for_free")</a>
                         </div>
                         <div class="cta-img position-absolute right-0 bottom-0">
                             <img src="{{asset('')}}assets/web/img/cta-img-1.png" alt="cta img" class="img-fluid">
@@ -131,11 +140,11 @@
                 <div class="col-lg-6 mt-4">
                     <div class="position-relative d-flex flex-column h-100 flex-wrap bg-primary-soft p-5 rounded-custom">
                         <div class="cta-left-info mb-2">
-                            <h5>Get real time updated anytime</h5>
-                            <p>Progressively reinvent models and niche revolutionary benefits for integrated niches. </p>
+                            <h5>@lang("web.build_your_personal")</h5>
+                            <p>@lang("web.build_your_personal_txt") </p>
                         </div>
                         <div class="mt-auto">
-                            <a href="request-demo.html" class="btn btn-outline-primary btn-sm">Start For Free</a>
+                            <a href="/register" class="btn btn-outline-primary btn-sm">@lang("web.start_for_free")</a>
                         </div>
                         <div class="cta-img position-absolute right-0 bottom-0">
                             <img src="{{asset('')}}assets/web/img/cta-img-2.png" alt="cta img" class="img-fluid">
@@ -149,7 +158,7 @@
     
     <!--feature left right content start-->
     <!--why choose us section start-->
-    <section class="why-choose-us ptb-120">
+    <!-- <section class="why-choose-us ptb-120">
         <div class="container">
             <div class="row justify-content-lg-between align-items-center">
                 <div class="col-lg-5 col-12">
@@ -177,11 +186,11 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!--why choose us section end-->
     
     <!--image feature section start-->
-    <section class="image-feature pt-60 pb-120">
+    <!-- <section class="image-feature pt-60 pb-120">
         <div class="container">
             <div class="row justify-content-between align-items-center">
                 <div class="col-lg-5 col-12 order-lg-1">
@@ -203,7 +212,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!--image feature section end-->
     <!--feature left right content end-->
     
@@ -213,8 +222,8 @@
             <div class="row justify-content-center align-content-center">
                 <div class="col-md-10 col-lg-6">
                     <div class="section-heading text-center">
-                        <h4 class="h5 text-warning text-primary">Testimonial</h4>
-                        <h2>What They Say About Us</h2>
+                        <h4 class="h5 text-warning text-primary">@lang("web.Testimonial")</h4>
+                        <h2>@lang("web.what_they_say_about_us")</h2>
                         <p>Uniquely promote adaptive quality vectors rather than stand-alone e-markets. pontificate alternative architectures whereas iterate.</p>
                     </div>
                 </div>
@@ -592,7 +601,7 @@
                         <!--our work process end-->
                         
                         <!--pricing section start-->
-                        <section class="pricing-section pt-60 pb-120  position-relative z-2">
+                        <!-- <section class="pricing-section pt-60 pb-120  position-relative z-2">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <div class="col-lg-6 col-md-10">
@@ -656,11 +665,11 @@
                                             </div>
                                             <a href="request-demo.html" class="btn btn-outline-primary mt-2">Buy Now</a>
                                             
-                                            <!--pattern start-->
+                                            
                                             <div class="dot-shape-bg position-absolute z--1 left--40 bottom--40">
                                                 <img src="{{asset('')}}assets/web/img/shape/dot-big-square.svg" alt="shape">
                                             </div>
-                                            <!--pattern end-->
+                                            
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-md-6">
@@ -704,16 +713,16 @@
                                             </div>
                                             <a href="request-demo.html" class="btn btn-outline-primary mt-2">Buy Now</a>
                                             
-                                            <!--pattern start-->
+                                            
                                             <div class="dot-shape-bg position-absolute z--1 right--40 top--40">
                                                 <img src="{{asset('')}}assets/web/img/shape/dot-big-square.svg" alt="shape">
                                             </div>
-                                            <!--pattern end-->
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </section>
+                        </section> -->
                         <!--pricing section end-->
                         
                         <!--faq section start-->
@@ -756,7 +765,7 @@
                         <!--faq section end-->
                         
                         <!--integration section start-->
-                        <section class="integration-section ptb-120">
+                        <!-- <section class="integration-section ptb-120">
                             <div class="container">
                                 <div class="row align-items-center justify-content-between">
                                     <div class="col-lg-3">
@@ -845,7 +854,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </section>
+                                </section> -->
                                 <!--integration section end-->
                                 
                                 <!--cat subscribe start-->

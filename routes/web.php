@@ -33,7 +33,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(),'middleware' => ['loc
     Route::get('about_us', [WebCompanyController::class,'about_us'])->name('about_us');
     Route::get('profile', [WebCompanyController::class,'profile'])->name('profile');
     Route::get('renewals', [WebCompanyController::class,'renewals'])->name('renewals');
-    Route::get('services/{slug}', [WebCompanyController::class,'service']);
+    Route::get('services/{slug}', [WebCompanyController::class,'service'])->name('service');
     
     Route::get('login', [WebCompanyController::class,'login'])->name('login');
     Route::get('register', [WebCompanyController::class,'register']);

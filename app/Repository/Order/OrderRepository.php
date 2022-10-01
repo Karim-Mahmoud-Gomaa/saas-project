@@ -38,6 +38,9 @@ class OrderRepository implements OrderRepositoryInterface
    
    public function index(array $columns=['*'],array $relations=[],array $appends=[],int $paginate=10,array $filter=[]){
       $data= $this->model->select($columns)->with($relations)
+      ->when(isset($filter['id']),function($q) use($filter){
+         $q->where('id',$filter['id']);
+      })
       ->when(isset($filter['user_id']),function($q) use($filter){
          $q->where('user_id',$filter['user_id']);
       })

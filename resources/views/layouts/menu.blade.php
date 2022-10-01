@@ -43,14 +43,6 @@
         <div class="dropdown-menu border-0 rounded-custom shadow py-0 bg-white">
             <div class="dropdown-grid rounded-custom">
                 <div class="dropdown-grid-item" style="white-space: nowrap;">
-                    <a rel="alternate" href="{{ LaravelLocalization::localizeUrl('/profile') }}" class="dropdown-link">
-                        <span class="me-2"><i class="fa-regular fa-address-book"></i></span>
-                        <div class="drop-title ar-font">@lang('web.your_profile')</div>
-                    </a>
-                    <a rel="alternate" href="{{ LaravelLocalization::localizeUrl('/checkout') }}" class="dropdown-link">
-                        <span class="me-2"><i class="fa-solid fa-cart-shopping"></i></span>
-                        <div class="drop-title ar-font">{{__('web.your_cart')}}</div>
-                    </a>
                     <a rel="alternate" href="javascrept:;" class="dropdown-link" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <span class="me-2"><i class="fa-solid fa-door-open"></i></span>
                         <div class="drop-title ar-font">@lang('web.logout')</div>

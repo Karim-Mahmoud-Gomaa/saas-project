@@ -23,7 +23,7 @@ class PagesTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'name' => 'Home Page',
-                'title' => '{"en":"Title in English","ar":"Title in Arabic"}',
+                'title' => '{"en":"Home","ar":"الرئيسية"}',
                 'keywords' => '{"en":"keywords in English","ar":"KEYWORDS (AR)"}',
                 'description' => '{"en":"description in English","ar":"\\u0634\\u0631\\u062d \\u0628\\u0627\\u0644\\u0639\\u0631\\u0628\\u064a"}',
             ),
@@ -31,7 +31,7 @@ class PagesTableSeeder extends Seeder
             array (
                 'id' => 3,
                 'name' => 'Service Page',
-                'title' => '{"en":"Title in English","ar":"Title in Arabic"}',
+                'title' => '{"en":"Services","ar":"خدمات"}',
                 'keywords' => '{"en":"keywords in English","ar":"KEYWORDS (AR)"}',
                 'description' => '{"en":"description in English","ar":"الوصف بالعربية"}',
             ),
@@ -39,7 +39,7 @@ class PagesTableSeeder extends Seeder
             array (
                 'id' => 4,
                 'name' => 'About Us',
-                'title' => '{"en":"About Us"}',
+                'title' => '{"en":"About Us","ar":"من نحن"}',
                 'keywords' => '{"en":"keywords in English","ar":"KEYWORDS (AR)"}',
                 'description' => '{"en":"description in English","ar":"\\u0634\\u0631\\u062d \\u0628\\u0627\\u0644\\u0639\\u0631\\u0628\\u064a"}',
             ),
@@ -47,7 +47,7 @@ class PagesTableSeeder extends Seeder
             array (
                 'id' => 6,
                 'name' => 'Login Page',
-                'title' => '{"en":"Login"}',
+                'title' => '{"en":"Login","ar":"تسجيل دخول"}',
                 'keywords' => '{"en":"keywords in English","ar":"KEYWORDS (AR)"}',
                 'description' => '{"en":"description in English","ar":"\\u0634\\u0631\\u062d \\u0628\\u0627\\u0644\\u0639\\u0631\\u0628\\u064a"}',
             ),

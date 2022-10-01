@@ -34,7 +34,7 @@
     <link rel="icon" href="{{asset('assets/web/img/favicon.png')}}" type="image/png" sizes="16x16">
     
     <!--title-->
-    
+    <title>@yield('title')</title>
     
     <!--google fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=Open+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
@@ -56,9 +56,12 @@
     @endphp
     @if ($lang=='ar')
     <style>
-        .ar-font{
+        *:not(.fas):not(.far):not(.fab):not(.fa-regular):not(.fa-solid):not(.fal){
             font-family: 'Noto Kufi Arabic', sans-serif !important;
-            text-align: right;
+            direction : rtl !important;
+        }
+        .float-end {
+            float: left;
         }
         .rtl{
             direction: rtl !important;
