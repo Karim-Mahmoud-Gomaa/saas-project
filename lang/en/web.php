@@ -125,4 +125,5 @@ return [
     'package' => 'Package',
     'view_details' => 'View Details',
     "already_subscribed" => "You are already subscribed",
+    "domain"=>"Domain",
 ];

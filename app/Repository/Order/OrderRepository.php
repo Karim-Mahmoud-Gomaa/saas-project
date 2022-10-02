@@ -14,6 +14,7 @@ use App\Repository\Promo\PromoFacade;
 use Illuminate\Support\Facades\DB;
 use App\Repository\Product\ProductFacade as Product;
 use App\Repository\Payment\PaymentFacade as Payment;
+use App\Services\DeployService;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -69,10 +70,12 @@ class OrderRepository implements OrderRepositoryInterface
                   'package_id'=>$detail->package_id,
                   'user_id'=>Auth::user()->id,
                   'months'=>$term->months,
+                  'path'=>$request["path"]
                ]);
+               DeployService::deploy($request["path"]);
             }
          }
-         $detail->update(['months'=>$months,'discount'=>$discount]);
+         $detail->update(['months'=>$months,'discount'=>$discount,'path'=>$request["path"]]);
       }
       Payment::Charge(Auth::user()->id,$model->price,$request->payment_method);
       // DB::rollBack();

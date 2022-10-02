@@ -76,6 +76,12 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-control-label">Type Your Subdomain </label><b class="text-danger">*</b>
+                                            <input class="form-control" v-model="path" type="text" placeholder="Ex: abc" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <a href="#" class="btn btn-danger float-end mt-4" :onclick="'event.preventDefault();document.getElementById(\'delete-form'+index+'\').submit();'">
                                             <i class="far fa-trash-alt"></i>
                                         </a>
@@ -243,6 +249,7 @@
                     page:1,
                     errors:null,
                     ccName:"",
+                    path: "",
                 }
             },
             mounted: function() {
@@ -456,6 +463,7 @@
                     let data={
                         payment_method : this.payment_method?this.payment_method:paymentMethodData.paymentMethod.id,
                         cart:this.cart,
+                        path:this.path,
                         promo:this.promo.value?this.promo.code:null
                     }
                     axios.post(route,data).then(({ data }) => {

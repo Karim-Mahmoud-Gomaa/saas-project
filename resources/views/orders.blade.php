@@ -47,6 +47,7 @@
                                                 <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">@lang('web.service') (@lang('web.package'))</th>
+                                                    <th scope="col">@lang('web.domain')</th>
                                                     <th scope="col">@lang('web.months')</th>
                                                     <th scope="col">@lang('web.discount')</th>
                                                     <th scope="col">@lang('web.total')</th>
@@ -56,6 +57,11 @@
                                             <tr>
                                                 <th scope="row">{{$key+1}}</th>
                                                 <td>{{$detail->package->service->name}} ({{$detail->package->name}})</td>
+                                                <td>
+                                                    <a href="http://{{$detail->path}}.bznsmonster.com">
+                                                        {{$detail->path}}.bznsmonster.com
+                                                    </a>
+                                                </td>
                                                 <td>{{$detail->months}}</td>
                                                 <td>% {{number_format($detail->discount,2,'.',',')}}</td>
                                                 <td>{{number_format($detail->total,2,'.',',')}}</td>

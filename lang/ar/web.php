@@ -125,5 +125,6 @@ return [
     'package' => 'باقة',
     'view_details' => 'عرض التفاصيل',
     "already_subscribed" => "انت مشترك بالفعل",
+    "domain" => "النطاق",
     
 ];
