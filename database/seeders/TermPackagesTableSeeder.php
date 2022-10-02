@@ -115,6 +115,24 @@ class TermPackagesTableSeeder extends Seeder
                 'package_id' => 7,
                 'discount' => '0.00',
             ),
+            16 => 
+            array (
+                'term_id' => 1,
+                'package_id' => 2,
+                'discount' => '0.00',
+            ),
+            17 => 
+            array (
+                'term_id' => 2,
+                'package_id' => 2,
+                'discount' => '0.00',
+            ),
+            18 => 
+            array (
+                'term_id' => 3,
+                'package_id' => 2,
+                'discount' => '0.00',
+            ),
         ));
         
         
