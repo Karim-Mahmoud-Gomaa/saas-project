@@ -20,6 +20,7 @@ class CreateOrderDetailsTable extends Migration
             $table->decimal('price', 10);
             $table->decimal('discount', 5)->default(0);
             $table->integer('months');
+            $table->string('path')->nullable();
         });
     }
 

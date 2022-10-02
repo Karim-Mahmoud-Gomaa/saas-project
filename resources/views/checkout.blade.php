@@ -413,7 +413,7 @@
                 },
                 async saveOrder() {
                     
-
+                    let paymentMethodData = null;
                     if(!this.payment_method){
                         const intentClientSecret = await this.createStripIntent();
                         console.log(intentClientSecret);
@@ -432,7 +432,7 @@
                             // Handle result.error or result.paymentIntent
                         });
 
-                        const paymentMethodData = await stripe.createPaymentMethod(
+                        paymentMethodData = await stripe.createPaymentMethod(
                             'card', this.card, {
                                 billing_details: { name: "Jenny Rosen" }
                             }

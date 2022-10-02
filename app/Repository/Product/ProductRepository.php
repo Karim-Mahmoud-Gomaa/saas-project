@@ -6,7 +6,7 @@ use App\Models\Product;
 use App\Repository\Product\ProductRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 
 class ProductRepository implements ProductRepositoryInterface
 {
